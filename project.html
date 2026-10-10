@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +6,11 @@
   <title>Project | Reyhan Kondapally</title>
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       background: #080d17;
@@ -16,15 +19,25 @@
       line-height: 1.8;
     }
 
-    a { color: #70d8ff; text-decoration: none; }
-    a:hover { color: white; }
+    a {
+      color: #70d8ff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: white;
+    }
 
     nav {
       padding: 20px 8%;
       border-bottom: 1px solid #202c3d;
     }
 
-    .logo { color: white; font-weight: bold; letter-spacing: 1px; }
+    .logo {
+      color: white;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
 
     main {
       width: min(820px, 88%);
@@ -53,7 +66,10 @@
       letter-spacing: -1px;
     }
 
-    .subtitle { color: #b9c5d7; font-size: 17px; }
+    .subtitle {
+      color: #b9c5d7;
+      font-size: 17px;
+    }
 
     .project-visual {
       min-height: 220px;
@@ -81,7 +97,9 @@
       border-radius: 9px;
     }
 
-    section { margin: 38px 0; }
+    section {
+      margin: 38px 0;
+    }
 
     h2 {
       font-size: 23px;
@@ -90,7 +108,10 @@
       border-bottom: 1px solid #25354b;
     }
 
-    section p { color: #b9c5d7; white-space: pre-line; }
+    section p {
+      color: #b9c5d7;
+      white-space: pre-line;
+    }
 
     .detail-panel {
       padding: 24px;
@@ -99,7 +120,20 @@
       border-radius: 10px;
     }
 
-    .detail-panel h2 { color: #70d8ff; }
+    .detail-panel h2 {
+      color: #70d8ff;
+    }
+
+    /* Images underneath Description, Challenges, and Improvements */
+    .section-photo {
+      display: block;
+      width: 100%;
+      max-width: 700px;
+      height: auto;
+      margin: 20px 0 35px;
+      border-radius: 12px;
+      border: 1px solid #263849;
+    }
 
     .edit-note {
       margin-top: 35px;
@@ -116,9 +150,21 @@
     }
 
     @media (max-width: 600px) {
-      nav { padding: 18px 5%; }
-      main { width: 90%; }
-      .detail-panel { padding: 19px; }
+      nav {
+        padding: 18px 5%;
+      }
+
+      main {
+        width: 90%;
+      }
+
+      .detail-panel {
+        padding: 19px;
+      }
+
+      .section-photo {
+        margin: 15px 0 28px;
+      }
     }
   </style>
 </head>
@@ -129,7 +175,9 @@
   </nav>
 
   <main>
-    <a class="back" href="index.html#projects">← Back to all projects</a>
+    <a class="back" href="index.html#projects">
+      ← Back to all projects
+    </a>
 
     <div class="eyebrow" id="project-number">PROJECT DETAILS</div>
     <h1 id="project-title">Loading project...</h1>
@@ -144,15 +192,24 @@
       <p id="project-description"></p>
     </section>
 
+    <img class="section-photo" id="description-image"
+         src="" alt="Project description image" hidden>
+
     <section class="detail-panel">
       <h2>Challenges</h2>
       <p id="project-challenges"></p>
     </section>
 
+    <img class="section-photo" id="challenges-image"
+         src="" alt="Project challenges image" hidden>
+
     <section class="detail-panel">
       <h2>Improvements</h2>
       <p id="project-improvements"></p>
     </section>
+
+    <img class="section-photo" id="improvements-image"
+         src="" alt="Project improvements image" hidden>
 
     <p class="edit-note">
       Engineering portfolio · Replace suggested text with your own
@@ -160,7 +217,9 @@
     </p>
 
     <p style="margin-top:30px">
-      <a href="index.html#projects">← Return to project collection</a>
+      <a href="index.html#projects">
+        ← Return to project collection
+      </a>
     </p>
   </main>
 
@@ -325,34 +384,79 @@
       document.getElementById("project-challenges").textContent = project.challenges;
       document.getElementById("project-improvements").textContent = project.improvements;
 
+      // Keep the existing large image at the top.
       if (project.photo) {
         const image = document.createElement("img");
         image.src = project.photo;
         image.alt = project.title + " project photograph";
 
         const visual = document.getElementById("project-visual");
+
         image.onerror = function () {
           visual.textContent = "ADD YOUR PROJECT PHOTO";
         };
+
         visual.textContent = "";
         visual.appendChild(image);
       } else {
         document.getElementById("project-visual").textContent =
           "ADD YOUR " + project.title.toUpperCase() + " PHOTO";
       }
+
+      // Load a different image for each of the three sections.
+      const sectionImages = [
+        {
+          id: "description-image",
+          file: "images/" + key + "-description.jpg",
+          alt: project.title + " description"
+        },
+        {
+          id: "challenges-image",
+          file: "images/" + key + "-challenges.jpg",
+          alt: project.title + " challenges"
+        },
+        {
+          id: "improvements-image",
+          file: "images/" + key + "-improvements.jpg",
+          alt: project.title + " improvements"
+        }
+      ];
+
+      sectionImages.forEach(function (item) {
+        const image = document.getElementById(item.id);
+
+        image.src = item.file;
+        image.alt = item.alt;
+        image.hidden = false;
+
+        image.onerror = function () {
+          image.hidden = true;
+          console.warn("Project image not found: " + item.file);
+        };
+      });
+
     } else {
       document.title = "Project Not Found | Reyhan Kondapally";
+
       document.getElementById("project-number").textContent = "PROJECT NOT FOUND";
       document.getElementById("project-title").textContent = "Select a project";
       document.getElementById("project-subtitle").textContent =
         "Return to the homepage and select one of the 11 project boxes.";
+
       document.getElementById("project-visual").style.display = "none";
+
       document.getElementById("project-description").textContent =
         "This project link could not be found. Return to the homepage to choose a project.";
+
       document.getElementById("project-challenges").textContent =
         "No project was selected.";
+
       document.getElementById("project-improvements").textContent =
         "Choose a project from the homepage to view its details.";
+
+      document.getElementById("description-image").hidden = true;
+      document.getElementById("challenges-image").hidden = true;
+      document.getElementById("improvements-image").hidden = true;
     }
   </script>
 </body>
