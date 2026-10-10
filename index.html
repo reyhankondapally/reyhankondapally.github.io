@@ -3,9 +3,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Reyhan Kondapally's engineering portfolio featuring aerospace, aircraft design, research, CAD, and structural engineering projects.">
   <title>Reyhan Kondapally | Engineering Portfolio</title>
-  <meta name="description" content="Aerospace engineering, aircraft design, aerodynamics, and independent projects.">
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -20,24 +20,40 @@
     }
 
     a { color: #70d8ff; text-decoration: none; }
-    a:hover { color: white; }
+    a:hover { color: #ffffff; }
 
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 16px;
       padding: 20px 8%;
       border-bottom: 1px solid #202c3d;
     }
 
-    .logo { color: white; font-weight: bold; letter-spacing: 1px; }
+    .logo {
+      color: #ffffff;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
 
-    nav a { margin-left: 18px; font-size: 14px; color: #b9c5d7; }
+    nav .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+    }
+
+    nav .nav-links a {
+      color: #b9c5d7;
+      font-size: 14px;
+    }
 
     .hero {
       padding: 100px 20px 85px;
       text-align: center;
-      background: radial-gradient(ellipse at top, #18334d, #0b1423 50%, #080d17 80%);
+      background: radial-gradient(
+        ellipse at top, #18334d 0%, #0b1423 48%, #080d17 78%
+      );
       border-bottom: 1px solid #202c3d;
     }
 
@@ -57,7 +73,7 @@
     }
 
     .hero p {
-      max-width: 640px;
+      max-width: 660px;
       margin: auto;
       color: #b5c3d6;
       font-size: 17px;
@@ -66,84 +82,109 @@
     .button {
       display: inline-block;
       padding: 11px 20px;
-      margin: 25px 5px 0;
+      margin-top: 28px;
+      background: #70d8ff;
+      color: #08111c;
       border: 1px solid #70d8ff;
       border-radius: 5px;
       font-size: 14px;
       font-weight: bold;
     }
 
-    .button.primary { background: #70d8ff; color: #08111c; }
+    .button:hover { background: #ffffff; color: #08111c; }
 
-    main { width: min(1000px, 88%); margin: auto; padding: 55px 0; }
+    main {
+      width: min(1050px, 88%);
+      margin: auto;
+      padding: 55px 0;
+    }
 
-    section { margin-bottom: 65px; scroll-margin-top: 25px; }
+    section {
+      margin-bottom: 65px;
+      scroll-margin-top: 25px;
+    }
 
-    h2 { font-size: 30px; margin: 8px 0 18px; }
+    h2 {
+      font-size: 30px;
+      margin: 8px 0 18px;
+    }
 
-    .intro { max-width: 760px; color: #b9c5d7; }
+    .intro {
+      max-width: 780px;
+      color: #b9c5d7;
+    }
 
     .projects {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 20px;
-      margin-top: 25px;
+      margin-top: 28px;
     }
 
     .card {
-      display: block;
+      display: flex;
+      flex-direction: column;
       color: inherit;
       background: #101a2a;
       border: 1px solid #25354b;
       border-radius: 10px;
       overflow: hidden;
+      min-width: 0;
       transition: transform .2s, border-color .2s;
     }
 
-    .card:hover {
+    .card:hover, .card:focus-visible {
       transform: translateY(-4px);
       border-color: #70d8ff;
+      outline: none;
     }
 
-    .project-image {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
-      display: block;
+    .card:focus-visible {
+      box-shadow: 0 0 0 2px #70d8ff;
     }
 
-    .image-placeholder {
-      aspect-ratio: 16 / 9;
+    .card-visual {
+      aspect-ratio: 16 / 8;
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 20px;
       text-align: center;
-      padding: 15px;
       background: linear-gradient(135deg, #142b42, #101827);
       color: #70d8ff;
       font-size: 12px;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
+      border-bottom: 1px solid #25354b;
     }
 
-    .card-content { padding: 24px; }
-    .number { color: #70d8ff; font-size: 12px; letter-spacing: 2px; }
-    h3 { font-size: 21px; margin: 8px 0 12px; }
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      align-items: flex-start;
+      padding: 23px;
+    }
 
-    .card p { color: #aebbd0; font-size: 14px; }
-
-    .tag {
-      display: inline-block;
-      margin-top: 18px;
-      padding: 4px 9px;
-      border: 1px solid #344960;
-      border-radius: 4px;
-      color: #8bdfff;
+    .number {
+      color: #70d8ff;
       font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    h3 {
+      font-size: 21px;
+      line-height: 1.4;
+      margin: 8px 0 12px;
+    }
+
+    .card p {
+      color: #aebbd0;
+      font-size: 14px;
     }
 
     .view-project {
-      display: block;
-      margin-top: 18px;
+      margin-top: auto;
+      padding-top: 20px;
       color: #70d8ff;
       font-size: 13px;
       font-weight: bold;
@@ -153,7 +194,7 @@
       border-left: 2px solid #70d8ff;
       padding: 8px 0 8px 22px;
       color: #b9c5d7;
-      max-width: 750px;
+      max-width: 780px;
     }
 
     footer {
@@ -165,11 +206,15 @@
     }
 
     @media (max-width: 650px) {
-      nav { padding: 18px 5%; flex-wrap: wrap; gap: 12px; }
-      nav a { margin-left: 10px; }
+      nav {
+        padding: 18px 5%;
+        flex-wrap: wrap;
+      }
+
+      nav .nav-links { gap: 14px; }
       .hero { padding: 75px 20px; }
-      .projects { grid-template-columns: 1fr; }
       main { width: 90%; }
+      .projects { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -177,7 +222,7 @@
 <body>
   <nav>
     <a class="logo" href="#">RK / ENGINEERING</a>
-    <div>
+    <div class="nav-links">
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
@@ -185,26 +230,28 @@
   </nav>
 
   <header class="hero">
-    <div class="eyebrow">Aerospace · Research · Design</div>
+    <div class="eyebrow">Aerospace · Design · Experimentation</div>
     <h1>Reyhan Kondapally</h1>
     <p>
       Aspiring aerospace engineer, inventor, and builder.
-      Exploring the science behind flight through hands-on
-      experimentation, engineering design, and research.
+      Exploring engineering through aircraft design, aerodynamic
+      research, hands-on experimentation, and mechanical systems.
     </p>
-    <a class="button primary" href="#projects">Explore My Work ↓</a>
+    <a class="button" href="#projects">Explore My Projects ↓</a>
   </header>
 
   <main>
     <section id="about">
-      <div class="section-label">01 / Background</div>
+      <div class="section-label">01 / About</div>
       <h2>Building to Understand.</h2>
       <p class="intro">
         My curiosity about flight began with a balsa wood glider.
         When it stalled and dropped into the grass, I started
-        investigating its balance and launch angle. That instinct
-        to question, test, and improve continues to shape how I
-        approach engineering.
+        investigating its balance and launch angle rather than
+        simply trying again. That instinct to question, test,
+        and improve continues to shape how I approach engineering.
+        Through independent projects, I explore how theoretical
+        ideas translate into physical designs and real-world behavior.
       </p>
     </section>
 
@@ -212,75 +259,120 @@
       <div class="section-label">02 / Selected Work</div>
       <h2>Projects & Research</h2>
       <p class="intro">
-        Click any project to explore its purpose, challenges,
-        and plans for the next iteration.
+        Explore each project to learn about its purpose, the challenges
+        I encountered, and the improvements I made or would investigate
+        in a future iteration.
       </p>
 
       <div class="projects">
 
         <a class="card" href="project.html?project=ignisfire">
-          <div class="image-placeholder">ADD IGNISFIRE PHOTO</div>
+          <div class="card-visual">PROJECT 01 / SAFETY SYSTEMS</div>
           <div class="card-content">
             <div class="number">PROJECT 01</div>
-            <h3>IgnisFire</h3>
-            <p>An AI-powered automatic fire-extinguishing system focused on aircraft safety.</p>
-            <span class="tag">Aircraft Safety</span>
-            <span class="view-project">Explore project ↗</span>
+            <h3>IgnisFire (Fire Prevention System)</h3>
+            <p>An AI-powered automatic fire-extinguishing system focused on aircraft fire safety.</p>
+            <span class="view-project">View project details ↗</span>
           </div>
         </a>
 
-        <a class="card" href="project.html?project=airfoil">
-          <div class="image-placeholder">ADD RESEARCH FIGURE</div>
+        <a class="card" href="project.html?project=airfoil-research">
+          <div class="card-visual">PROJECT 02 / AERODYNAMICS</div>
           <div class="card-content">
             <div class="number">PROJECT 02</div>
             <h3>Airfoil Research</h3>
-            <p>Investigating how airfoil geometry and angle of attack affect lift, drag, and boundary-layer flow.</p>
-            <span class="tag">Research & Analysis</span>
-            <span class="view-project">Explore project ↗</span>
+            <p>Investigating the effects of airfoil geometry and angle of attack on lift, drag, and flow behavior.</p>
+            <span class="view-project">View project details ↗</span>
+          </div>
+        </a>
+
+        <a class="card" href="project.html?project=airfoil-implementation">
+          <div class="card-visual">PROJECT 03 / APPLICATION</div>
+          <div class="card-content">
+            <div class="number">PROJECT 03</div>
+            <h3>Airfoil Implementation</h3>
+            <p>Applying aerodynamic research to a practical design or build. Add the specific aircraft or component you developed.</p>
+            <span class="view-project">View project details ↗</span>
+          </div>
+        </a>
+
+        <a class="card" href="project.html?project=wind-tunnel">
+          <div class="card-visual">PROJECT 04 / EXPERIMENTAL TESTING</div>
+          <div class="card-content">
+            <div class="number">PROJECT 04</div>
+            <h3>Wind Tunnel</h3>
+            <p>Building a wind tunnel to investigate airflow over wings and observe the effects of design changes.</p>
+            <span class="view-project">View project details ↗</span>
           </div>
         </a>
 
         <a class="card" href="project.html?project=corsair">
-          <div class="image-placeholder">ADD YOUR CORSAIR PHOTO</div>
-          <div class="card-content">
-            <div class="number">PROJECT 03</div>
-            <h3>RC Corsair Design</h3>
-            <p>Exploring the distinctive inverted-gull wing and its relationship to landing gear and ground clearance.</p>
-            <span class="tag">Aircraft Design</span>
-            <span class="view-project">Explore project ↗</span>
-          </div>
-        </a>
-
-        <a class="card" href="project.html?project=windtunnel">
-          <div class="image-placeholder">ADD WIND TUNNEL PHOTO</div>
-          <div class="card-content">
-            <div class="number">PROJECT 04</div>
-            <h3>DIY Wind Tunnel</h3>
-            <p>Building an experimental setup to investigate airflow over wings and the effects of design changes.</p>
-            <span class="tag">Experimental Aerodynamics</span>
-            <span class="view-project">Explore project ↗</span>
-          </div>
-        </a>
-
-        <a class="card" href="project.html?project=glider">
-          <div class="image-placeholder">ADD GLIDER PHOTO</div>
+          <div class="card-visual">PROJECT 05 / RC AIRCRAFT</div>
           <div class="card-content">
             <div class="number">PROJECT 05</div>
-            <h3>Balsa Wood Glider</h3>
-            <p>Where my curiosity about flight began: investigating stability, balance, and why a glider stalls.</p>
-            <span class="tag">Flight Fundamentals</span>
-            <span class="view-project">Explore project ↗</span>
+            <h3>Vought F4U Corsair</h3>
+            <p>Building a radio-controlled model of the Corsair and exploring its distinctive inverted-gull wing.</p>
+            <span class="view-project">View project details ↗</span>
           </div>
         </a>
 
-        <a class="card" href="project.html?project=outreach">
-          <div class="image-placeholder">ADD CLUB OR BUILD PHOTO</div>
+        <a class="card" href="project.html?project=fokker-dr1">
+          <div class="card-visual">PROJECT 06 / HISTORICAL AIRCRAFT</div>
           <div class="card-content">
             <div class="number">PROJECT 06</div>
-            <h3>Aerospace Club & STEM Outreach</h3>
-            <p>Sharing model aircraft building and the physics of flight with other students and young builders.</p>
-            <span class="tag">Engineering Outreach</span>
-            <span class="view-project">Explore project ↗</span>
+            <h3>Fokker DR1</h3>
+            <p>A triplane aircraft project exploring the design, construction, and flight characteristics of a historic aircraft.</p>
+            <span class="view-project">View project details ↗</span>
+          </div>
+        </a>
+
+        <a class="card" href="project.html?project=wee-papillon">
+          <div class="card-visual">PROJECT 07 / MODEL AIRCRAFT</div>
+          <div class="card-content">
+            <div class="number">PROJECT 07</div>
+            <h3>Wee Papillon</h3>
+            <p>A model aircraft project focused on translating a design into a working build. Add your specific design details.</p>
+            <span class="view-project">View project details ↗</span>
+          </div>
+        </a>
+
+        <a class="card" href="project.html?project=mousetrap-car">
+          <div class="card-visual">PROJECT 08 / MECHANICAL DESIGN</div>
+          <div class="card-content">
+            <div class="number">PROJECT 08</div>
+            <h3>Mousetrap Car</h3>
+            <p>Exploring mechanical advantage, stored energy, friction, and wheel-and-axle design in a mousetrap-powered vehicle.</p>
+            <span class="view-project">View project details ↗</span>
+          </div>
+        </a>
+
+        <a class="card" href="project.html?project=automata-cad">
+          <div class="card-visual">PROJECT 09 / CAD & MECHANISMS</div>
+          <div class="card-content">
+            <div class="number">PROJECT 09</div>
+            <h3>Automata CAD</h3>
+            <p>Using computer-aided design to model a mechanical automaton and explore how mechanisms translate motion.</p>
+            <span class="view-project">View project details ↗</span>
+          </div>
+        </a>
+
+        <a class="card" href="project.html?project=truss-design">
+          <div class="card-visual">PROJECT 10 / STRUCTURAL ANALYSIS</div>
+          <div class="card-content">
+            <div class="number">PROJECT 10</div>
+            <h3>Truss Design</h3>
+            <p>Exploring structural geometry, load paths, and member forces in a truss design.</p>
+            <span class="view-project">View project details ↗</span>
+          </div>
+        </a>
+
+        <a class="card" href="project.html?project=bridge-building">
+          <div class="card-visual">PROJECT 11 / STRUCTURAL ENGINEERING</div>
+          <div class="card-content">
+            <div class="number">PROJECT 11</div>
+            <h3>Bridge Building</h3>
+            <p>Designing and constructing a bridge while investigating strength, stability, material use, and load capacity.</p>
+            <span class="view-project">View project details ↗</span>
           </div>
         </a>
 
@@ -288,14 +380,13 @@
     </section>
 
     <section>
-      <div class="section-label">03 / Engineering Philosophy</div>
+      <div class="section-label">03 / My Approach</div>
       <h2>Question. Build. Test. Improve.</h2>
       <p class="approach">
-        I am interested in the space between theory and reality:
-        where predictions meet experiments, designs encounter
-        limitations, and unexpected results lead to better questions.
-        I want to understand not just whether something works,
-        but why it works and how it can be improved.
+        I want to understand not just whether a design works, but why
+        it works, where it falls short, and how evidence can guide the
+        next iteration. Each project is an opportunity to connect
+        engineering theory with practical decisions and testing.
       </p>
     </section>
 
