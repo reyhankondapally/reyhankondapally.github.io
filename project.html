@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Project | Reyhan Kondapally</title>
 
   <style>
@@ -29,10 +29,14 @@
     main {
       width: min(820px, 88%);
       margin: auto;
-      padding: 55px 0 80px;
+      padding: 48px 0 80px;
     }
 
-    .back { display: inline-block; margin-bottom: 38px; font-size: 14px; }
+    .back {
+      display: inline-block;
+      margin-bottom: 35px;
+      font-size: 14px;
+    }
 
     .eyebrow {
       color: #70d8ff;
@@ -43,72 +47,78 @@
     }
 
     h1 {
-      font-size: clamp(34px, 6vw, 54px);
+      font-size: clamp(32px, 6vw, 52px);
       line-height: 1.2;
       margin: 12px 0 18px;
       letter-spacing: -1px;
     }
 
-    .subtitle { color: #b9c5d7; font-size: 17px; margin-bottom: 30px; }
+    .subtitle { color: #b9c5d7; font-size: 17px; }
 
-    .hero-image {
-      width: 100%;
-      min-height: 210px;
+    .project-visual {
+      min-height: 220px;
       aspect-ratio: 16 / 7;
-      object-fit: cover;
-      display: block;
-      margin: 28px 0 42px;
-      border: 1px solid #25354b;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #142b42, #101827);
-    }
-
-    .image-placeholder {
+      margin: 30px 0 42px;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      color: #70d8ff;
-      letter-spacing: 1px;
-      font-size: 12px;
       padding: 20px;
+      background: linear-gradient(135deg, #142b42, #101827);
+      border: 1px solid #25354b;
+      border-radius: 10px;
+      color: #70d8ff;
+      font-size: 12px;
+      letter-spacing: 2px;
     }
 
-    section { margin: 42px 0; }
+    .project-visual img {
+      width: 100%;
+      height: 100%;
+      min-height: 220px;
+      max-height: 430px;
+      object-fit: contain;
+      border-radius: 9px;
+    }
+
+    section { margin: 38px 0; }
 
     h2 {
       font-size: 23px;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
+      margin-bottom: 13px;
+      padding-bottom: 9px;
       border-bottom: 1px solid #25354b;
     }
 
-    section p, section li { color: #b9c5d7; }
+    section p { color: #b9c5d7; white-space: pre-line; }
 
-    ul { padding-left: 22px; }
-    li { margin: 8px 0; }
-
-    .panel {
+    .detail-panel {
+      padding: 24px;
       background: #101a2a;
       border: 1px solid #25354b;
-      border-radius: 9px;
-      padding: 24px;
+      border-radius: 10px;
     }
 
-    .panel h2 { color: #70d8ff; }
+    .detail-panel h2 { color: #70d8ff; }
 
-    .note {
-      color: #8ea0b9;
-      font-size: 13px;
-      margin-top: 14px;
+    .edit-note {
+      margin-top: 35px;
+      color: #8293aa;
+      font-size: 12px;
     }
 
     footer {
       text-align: center;
-      padding: 25px;
+      padding: 28px 20px;
       border-top: 1px solid #202c3d;
       color: #8493a9;
       font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 18px 5%; }
+      main { width: 90%; }
+      .detail-panel { padding: 19px; }
     }
   </style>
 </head>
@@ -121,42 +131,36 @@
   <main>
     <a class="back" href="index.html#projects">← Back to all projects</a>
 
-    <div class="eyebrow" id="number">PROJECT</div>
-    <h1 id="title">Loading project...</h1>
-    <p class="subtitle" id="subtitle"></p>
+    <div class="eyebrow" id="project-number">PROJECT DETAILS</div>
+    <h1 id="project-title">Loading project...</h1>
+    <p class="subtitle" id="project-subtitle"></p>
 
-    <div class="hero-image image-placeholder" id="image">
+    <div class="project-visual" id="project-visual">
       ADD YOUR PROJECT PHOTO
     </div>
 
     <section>
-      <h2>Project Description</h2>
-      <p id="description"></p>
+      <h2>Description</h2>
+      <p id="project-description"></p>
     </section>
 
-    <section class="panel">
+    <section class="detail-panel">
       <h2>Challenges</h2>
-      <p id="challenges"></p>
+      <p id="project-challenges"></p>
     </section>
 
-    <section class="panel">
-      <h2>What I Did in the Next Iteration</h2>
-      <p id="iteration"></p>
+    <section class="detail-panel">
+      <h2>Improvements</h2>
+      <p id="project-improvements"></p>
     </section>
 
-    <section>
-      <h2>What I Learned</h2>
-      <p id="learning"></p>
-    </section>
-
-    <p class="note">
-      Replace general descriptions with your actual design decisions,
-      test results, mistakes, and improvements. Clearly distinguish
-      completed work from future plans.
+    <p class="edit-note">
+      Engineering portfolio · Replace suggested text with your own
+      design process, specific challenges, actual changes, and test results.
     </p>
 
-    <p style="margin-top:35px">
-      <a href="index.html#projects">← Explore more projects</a>
+    <p style="margin-top:30px">
+      <a href="index.html#projects">← Return to project collection</a>
     </p>
   </main>
 
@@ -164,121 +168,191 @@
 
   <script>
     const projects = {
-      ignisfire: {
-        number: "PROJECT 01 / AIRCRAFT SAFETY",
-        title: "IgnisFire",
-        subtitle: "Developing an AI-powered automatic fire-extinguishing system.",
-        image: "images/ignisfire.jpg",
-        imageAlt: "IgnisFire project",
-        description: "IgnisFire is my project focused on improving aircraft fire safety through an AI-powered automatic fire-extinguishing system. The goal is to develop a system that can identify a fire-related threat and respond automatically. ADD YOUR SPECIFIC DESIGN: explain what the system detects, how the AI is used, how suppression is triggered, and what you personally designed or built.",
-        challenges: "A key engineering challenge is determining how a fire can be detected reliably while avoiding false alarms. Another is deciding how the system should respond and how to verify that the response is appropriate. Describe the actual technical obstacle you encountered, the options you considered, and the evidence that helped you make a decision.",
-        iteration: "In the next iteration, I would address the most important limitation identified in testing. For example, if detection reliability is the main issue, I would test the system under a wider range of conditions and measure false positives and missed detections. Replace this example with what you actually changed or plan to test next.",
-        learning: "Describe what this project taught you about system integration, detection, automation, testing, and designing for safety. Include a concrete result or realization from your own work."
+      "ignisfire": {
+        number: "PROJECT 01 / SAFETY SYSTEMS",
+        title: "IgnisFire (Fire Prevention System)",
+        subtitle: "An AI-powered automatic fire-extinguishing system.",
+        photo: "",
+        description:
+          "IgnisFire is my project focused on aircraft fire safety through an AI-powered automatic fire-extinguishing system. The goal is to develop a system that can identify a fire-related threat and initiate an appropriate response. Add the specific problem you set out to solve, how your system works, which components you designed, and your individual contribution.",
+        challenges:
+          "A major design consideration is reliable detection: the system must distinguish a genuine threat from conditions that could trigger a false alarm. Other possible challenges include response time, sensor placement, system integration, and safe activation. Describe the actual technical obstacle you encountered, what you tried, and what your tests revealed.",
+        improvements:
+          "Describe the next version of IgnisFire. Potential directions include testing detection reliability across more conditions, measuring response time, evaluating false alarms, or improving integration between sensing and suppression. Clearly distinguish improvements already implemented from future tests. Do not claim validated aircraft readiness unless it has been established."
       },
 
-      airfoil: {
-        number: "PROJECT 02 / AERODYNAMICS RESEARCH",
+      "airfoil-research": {
+        number: "PROJECT 02 / AERODYNAMICS",
         title: "Airfoil Research",
-        subtitle: "Investigating the effects of airfoil geometry and angle of attack.",
-        image: "images/airfoil-research.png",
-        imageAlt: "Airfoil research results",
-        description: "My research investigates how airfoil geometry and angle of attack affect the coefficients of lift and drag, as well as vorticity and behavior near the boundary layer. I use this question to explore the relationship between wing shape, flow behavior, and aerodynamic performance. ADD YOUR RESEARCH METHOD, AIRFOIL PROFILES, SOFTWARE, AND CONDITIONS STUDIED.",
-        challenges: "One challenge in comparing airfoils is making sure the comparison is meaningful. Angle of attack, flow speed, Reynolds number, and other conditions can affect the results. Explain which variables were difficult to control, what limitations your method had, and how you checked that your results made sense.",
-        iteration: "In the next iteration, I would compare selected airfoil geometries under consistent conditions, examine changes in lift and drag across angles of attack, and investigate how the flow field relates to the measured or calculated coefficients. Describe the comparisons you actually performed and the next analysis you intend to carry out.",
-        learning: "Explain what your results revealed about the relationship between airfoil shape, angle of attack, lift, drag, and boundary-layer behavior. Include numerical findings only when you have data to support them."
+        subtitle: "Investigating airfoil geometry, angle of attack, and flow behavior.",
+        photo: "",
+        description:
+          "My research investigates how airfoil geometry and angle of attack affect the coefficients of lift and drag, along with vorticity and flow behavior near the boundary layer. The goal is to understand how changes in airfoil design influence aerodynamic performance. Add the airfoil profiles, research question, analysis tools, test conditions, and methodology you actually used.",
+        challenges:
+          "Comparing aerodynamic performance requires attention to variables such as angle of attack, Reynolds number, and flow conditions. Numerical models may also have limitations in resolving separation and boundary-layer behavior. Explain which challenge applied to your research, how you addressed it, and what uncertainties remain in your results.",
+        improvements:
+          "A next iteration could compare multiple airfoil profiles under consistent conditions, investigate more angles of attack, or compare calculated lift and drag with experimental observations. State the changes you actually made or plan to make, and include numerical results only when supported by your data."
       },
 
-      corsair: {
-        number: "PROJECT 03 / AIRCRAFT DESIGN",
-        title: "RC Corsair Design",
-        subtitle: "Exploring an inverted-gull wing through radio-controlled aircraft building.",
-        image: "images/corsair.jpg",
-        imageAlt: "My RC Corsair aircraft",
-        description: "I built a radio-controlled Corsair featuring its distinctive inverted-gull wing. The Corsair's wing geometry is an interesting design case because the inner wing bends downward before the outer wing rises. On the full-size aircraft, this arrangement helped provide propeller clearance while accommodating relatively short landing gear. Explain how your model reproduces this shape and what design decisions you made.",
-        challenges: "Translating a distinctive wing shape into a working model requires attention to alignment, structural support, weight, and balance. Describe the specific challenge you faced during construction or flight testing. If you investigated dirt-runway operations, explain the ground-clearance or landing-gear issue you were trying to solve.",
-        iteration: "For a next iteration, I would identify the biggest limitation in the original build and change one design variable at a time. Depending on the actual problem, this could mean refining wing alignment, reinforcing a joint, adjusting balance, or improving landing-gear clearance. Document the changes you made and how you evaluated their effects.",
-        learning: "Describe what building and flying the model taught you about turning a real aircraft's design features into a practical model. Explain one specific decision you would make differently now."
+      "airfoil-implementation": {
+        number: "PROJECT 03 / DESIGN APPLICATION",
+        title: "Airfoil Implementation",
+        subtitle: "Translating aerodynamic analysis into a practical design.",
+        photo: "",
+        description:
+          "This project focuses on applying airfoil concepts to a physical aircraft, wing, or design. Explain which airfoil you selected, what it was used for, and how your research informed the decision. Add the design dimensions, materials, software, fabrication process, and intended operating conditions relevant to your build.",
+        challenges:
+          "Implementing an airfoil involves more than selecting a profile. Structural requirements, weight, manufacturability, surface finish, and operating conditions can affect the final design. Describe the specific trade-off or construction difficulty you encountered and how you decided what to prioritize.",
+        improvements:
+          "For the next iteration, identify one measurable design objective, such as reducing weight, improving dimensional accuracy, or evaluating performance across a range of operating conditions. Describe any revised geometry or construction method you tested, and explain how you would measure whether the change helped."
       },
 
-      windtunnel: {
+      "wind-tunnel": {
         number: "PROJECT 04 / EXPERIMENTAL AERODYNAMICS",
-        title: "DIY Wind Tunnel",
-        subtitle: "Building an experimental setup to visualize airflow over wings.",
-        image: "images/wind-tunnel.jpg",
-        imageAlt: "My homemade wind tunnel",
-        description: "I built my own wind tunnel to investigate airflow over wings rather than limiting my learning to the fundamentals covered in class. The setup allowed me to explore how wing geometry and angle of attack affect the flow. ADD DETAILS ABOUT THE TUNNEL DESIGN, AIRFLOW VISUALIZATION METHOD, TEST ARTICLES, AND HOW YOU RECORDED OBSERVATIONS.",
-        challenges: "An experimental setup is only useful when its observations are meaningful. Potential issues include uneven airflow, turbulence introduced by the tunnel itself, inconsistent test conditions, and difficulty visualizing the flow clearly. Describe which of these—or another specific problem—you actually encountered and how you identified it.",
-        iteration: "In the next iteration, I would improve the part of the setup that most limits the quality of my observations. Possible improvements include making the incoming flow more uniform, improving visualization, or creating a repeatable way to vary angle of attack. State which changes you actually made and what evidence showed whether they helped.",
-        learning: "Explain what the tunnel let you observe that you could not understand as clearly from theory alone. Discuss an observation that surprised you and how it changed your understanding."
+        title: "Wind Tunnel",
+        subtitle: "Building a setup to investigate airflow over wings.",
+        photo: "",
+        description:
+          "I built a wind tunnel to investigate airflow over wings and explore how wing geometry and angle of attack affect flow behavior. This project gave me a way to investigate aerodynamics experimentally instead of relying only on theory. Add details about the tunnel's construction, airflow visualization method, test articles, and how you recorded observations.",
+        challenges:
+          "Experimental observations depend on the quality and consistency of the airflow. Potential limitations include nonuniform flow, turbulence, vibration, and difficulty observing flow features clearly. Explain the actual limitation you encountered, how you recognized it, and what effect it had on your experiments.",
+        improvements:
+          "A future iteration could improve flow uniformity, refine the test section, make the angle of attack easier to adjust, or establish a more repeatable visualization method. Explain which improvements you actually implemented and what changed in the resulting observations."
       },
 
-      glider: {
-        number: "PROJECT 05 / FLIGHT FUNDAMENTALS",
-        title: "Balsa Wood Glider",
-        subtitle: "The first experiment that made me question why aircraft fly.",
-        image: "images/balsa-glider.jpg",
-        imageAlt: "My balsa wood glider",
-        description: "My interest in flight began when I built a balsa wood glider at age eight. During early launches, the nose pitched up, the glider stalled, and it dropped into the grass. Instead of treating every failed flight as the same mistake, I began investigating balance and launch angle. Describe the adjustments you made and how you evaluated each flight.",
-        challenges: "The challenge was understanding why the glider behaved differently from what I expected. Balance, center of gravity, launch attitude, and wing design can all influence flight. Explain what you initially misunderstood, which factor you investigated first, and how you distinguished a useful change from an inconsistent launch.",
-        iteration: "I began changing the glider's balance and launch angle instead of repeating the same launch. For the next iteration, I would record each adjustment and flight outcome more systematically, changing one variable at a time so I could better understand the effect of each change. Include any actual measurements or observations you recorded.",
-        learning: "This experience taught me to treat an unexpected result as a question worth investigating. It established the habit of testing one variable at a time and looking for an explanation instead of relying on trial and error alone."
+      "corsair": {
+        number: "PROJECT 05 / RC AIRCRAFT",
+        title: "Vought F4U Corsair",
+        subtitle: "Building a model of the distinctive inverted-gull-wing fighter.",
+        photo: "",
+        description:
+          "I built a radio-controlled model of the Vought F4U Corsair, an aircraft known for its distinctive inverted-gull wing. The project connects aircraft geometry with practical model construction. The full-size Corsair's wing arrangement helped accommodate a large propeller while allowing relatively short landing gear. Explain how your model was built, which design features you reproduced, and what you wanted to learn.",
+        challenges:
+          "A model aircraft requires attention to alignment, center of gravity, structural strength, control setup, and landing-gear clearance. Describe the actual issue you faced during construction or flight testing. If you investigated operation from dirt runways, explain the ground-clearance or landing problem you wanted to address.",
+        improvements:
+          "Identify the biggest limitation of your initial build and describe how you addressed it or would approach it in a future version. Depending on your actual experience, this could involve refining alignment, adjusting balance, improving structural joints, or modifying the landing gear. Explain how you evaluated the effect of any change."
       },
 
-      outreach: {
-        number: "PROJECT 06 / STEM OUTREACH",
-        title: "Aerospace Club & STEM Outreach",
-        subtitle: "Sharing the science of flight through model aircraft.",
-        image: "images/aerospace-outreach.jpg",
-        imageAlt: "Aerospace club or outreach activity",
-        description: "Through my aerospace interests and club activities, I want to make aircraft building and the physics of flight accessible to other students and young builders. This project can document the club, model-building demonstrations, presentations, or lessons I have personally organized or delivered. ADD SPECIFIC ACTIVITIES AND YOUR ROLE.",
-        challenges: "One challenge in teaching engineering is making abstract ideas understandable without losing the underlying physics. Describe a specific concept, build, or activity that was difficult to explain, what questions learners had, and how you responded.",
-        iteration: "For a next iteration, I would refine the activity based on what participants found confusing or engaging. For example, I could develop a guided glider-building activity in which students change one design feature and compare flight outcomes. Replace this with a real improvement you made or a concrete next step you are planning.",
-        learning: "Explain what you learned about communicating engineering ideas, helping others troubleshoot, or designing an activity that lets students discover a physical principle themselves."
+      "fokker-dr1": {
+        number: "PROJECT 06 / AIRCRAFT DESIGN",
+        title: "Fokker DR1",
+        subtitle: "Exploring the construction and design of a historic triplane.",
+        photo: "",
+        description:
+          "The Fokker Dr.I is a historic First World War triplane recognized by its three-wing configuration. This project explores translating that distinctive aircraft into a model. Describe the particular kit or plans you used, the scale, construction materials, and which parts of the aircraft design interested you most.",
+        challenges:
+          "A triplane model introduces construction and alignment considerations across three wings, along with weight, structural rigidity, and control setup. Describe the specific construction or flight challenge you encountered rather than assuming every potential issue occurred in your build.",
+        improvements:
+          "For a future iteration, consider how to improve alignment between the wings, reduce unnecessary weight, reinforce a weak joint, or make assembly more repeatable—if those issues apply to your model. Explain what you changed, or identify the next test you would perform."
+      },
+
+      "wee-papillon": {
+        number: "PROJECT 07 / MODEL AIRCRAFT",
+        title: "Wee Papillon",
+        subtitle: "Model aircraft design, construction, and experimentation.",
+        photo: "",
+        description:
+          "This project documents my Wee Papillon model aircraft. Describe the design or kit, its intended flying characteristics, how I constructed it, and the engineering question I wanted to explore. Include the model's configuration, materials, power system if applicable, and any modifications I made.",
+        challenges:
+          "Describe the most important obstacle in this particular build. It could involve fitting components, keeping the structure aligned, balancing the aircraft, setting up its controls, or achieving consistent flight performance—but include only the challenges that actually applied to my project.",
+        improvements:
+          "Explain how I improved the aircraft after the initial build or what I would change next. I could discuss a revised component layout, improved construction accuracy, changes to balance, or more systematic flight testing if relevant. Include evidence of any improvement already tested."
+      },
+
+      "mousetrap-car": {
+        number: "PROJECT 08 / MECHANICAL DESIGN",
+        title: "Mousetrap Car",
+        subtitle: "Investigating stored energy, torque, and mechanical advantage.",
+        photo: "",
+        description:
+          "The mousetrap car project explores how stored spring energy can be converted into vehicle motion. Its performance depends on the relationship between the driving arm, axle, wheel radius, traction, and friction. Describe my vehicle's design, the materials used, the goal of the build, and how I measured its performance.",
+        challenges:
+          "A mousetrap car must balance distance, speed, and reliable movement. Friction, wheel alignment, axle resistance, traction, and the linkage geometry can all affect performance. Identify the real problem I encountered, the evidence I used to understand it, and the design choice I made in response.",
+        improvements:
+          "In a next iteration, I could change one variable at a time—for example, wheel diameter, axle friction, or linkage geometry—and compare repeated trials. Describe the modification I actually tested, the measured result, and how the evidence informed the next design decision."
+      },
+
+      "automata-cad": {
+        number: "PROJECT 09 / CAD & MECHANISMS",
+        title: "Automata CAD",
+        subtitle: "Modeling mechanical motion through computer-aided design.",
+        photo: "",
+        description:
+          "This project focuses on designing a mechanical automaton using computer-aided design. An automaton uses mechanisms to convert an input motion into a repeated movement. Describe the moving elements I modeled, the CAD software used, the intended motion, and how the individual components work together.",
+        challenges:
+          "A mechanism that looks correct in a static CAD view may not move as intended. Component interference, pivot placement, clearances, and motion constraints can all affect its operation. Describe the actual issue I encountered in the model and how I identified its cause.",
+        improvements:
+          "The next iteration could refine the mechanism geometry, adjust pivot locations, improve clearances, or test the motion through an assembly simulation. Explain the actual CAD revisions I made, how I checked movement, and what I would validate in a physical prototype if applicable."
+      },
+
+      "truss-design": {
+        number: "PROJECT 10 / STRUCTURAL ENGINEERING",
+        title: "Truss Design",
+        subtitle: "Exploring structural geometry and the distribution of loads.",
+        photo: "",
+        description:
+          "This project investigates how a truss transfers loads through interconnected structural members. The arrangement of its members and joints affects the forces carried by the structure. Describe the truss geometry I designed, the material and design constraints, how loads were applied or calculated, and the goal I was trying to achieve.",
+        challenges:
+          "A truss design requires attention to member forces, joint behavior, stability, buckling, and material limitations. Explain the actual challenge I encountered, whether through calculations, CAD, or physical testing, and how it influenced my design choices.",
+        improvements:
+          "A next iteration could compare alternative truss geometries, revise member dimensions, or redistribute material to improve strength or efficiency. Describe the changes I actually made, how I assessed them, and any load-test or calculation results that support my conclusions."
+      },
+
+      "bridge-building": {
+        number: "PROJECT 11 / STRUCTURAL ENGINEERING",
+        title: "Bridge Building",
+        subtitle: "Designing and constructing a bridge under structural constraints.",
+        photo: "",
+        description:
+          "This project involves designing and building a bridge to meet a set of structural and construction requirements. The challenge is to transfer loads safely through the structure while working within material, span, and design constraints. Describe the bridge type, materials, construction process, requirements, and how its performance was evaluated.",
+        challenges:
+          "Potential challenges include joint strength, uneven load distribution, structural deflection, buckling, and material limits. Explain the actual failure point, design constraint, or construction difficulty I encountered, and what the calculations or tests revealed about the structure.",
+        improvements:
+          "For a next iteration, I could revise the truss arrangement, reinforce a critical joint, reduce unnecessary material, or improve the load distribution. Explain which changes I actually made or would test next, and compare the results using measured load capacity, deflection, mass, or another relevant metric."
       }
     };
 
-    const params = new URLSearchParams(window.location.search);
-    const key = params.get("project");
+    const key = new URLSearchParams(window.location.search).get("project");
     const project = projects[key];
 
     if (project) {
       document.title = project.title + " | Reyhan Kondapally";
 
-      document.getElementById("number").textContent = project.number;
-      document.getElementById("title").textContent = project.title;
-      document.getElementById("subtitle").textContent = project.subtitle;
-      document.getElementById("description").textContent = project.description;
-      document.getElementById("challenges").textContent = project.challenges;
-      document.getElementById("iteration").textContent = project.iteration;
-      document.getElementById("learning").textContent = project.learning;
+      document.getElementById("project-number").textContent = project.number;
+      document.getElementById("project-title").textContent = project.title;
+      document.getElementById("project-subtitle").textContent = project.subtitle;
+      document.getElementById("project-description").textContent = project.description;
+      document.getElementById("project-challenges").textContent = project.challenges;
+      document.getElementById("project-improvements").textContent = project.improvements;
 
-      const imageBox = document.getElementById("image");
-      const img = document.createElement("img");
-      img.src = project.image;
-      img.alt = project.imageAlt;
-      img.className = "hero-image";
+      if (project.photo) {
+        const image = document.createElement("img");
+        image.src = project.photo;
+        image.alt = project.title + " project photograph";
 
-      img.onerror = function () {
-        imageBox.textContent = "ADD YOUR PROJECT PHOTO";
-        imageBox.style.display = "flex";
-        imageBox.classList.add("image-placeholder");
-      };
-
-      imageBox.replaceWith(img);
+        const visual = document.getElementById("project-visual");
+        image.onerror = function () {
+          visual.textContent = "ADD YOUR PROJECT PHOTO";
+        };
+        visual.textContent = "";
+        visual.appendChild(image);
+      } else {
+        document.getElementById("project-visual").textContent =
+          "ADD YOUR " + project.title.toUpperCase() + " PHOTO";
+      }
     } else {
-      document.getElementById("number").textContent = "PROJECT NOT FOUND";
-      document.getElementById("title").textContent = "Choose a project";
-      document.getElementById("subtitle").textContent =
-        "Return to the portfolio and select one of the project cards.";
-      document.getElementById("image").style.display = "none";
-      document.getElementById("description").textContent =
-        "This project link does not match an available project.";
-      document.getElementById("challenges").textContent =
-        "Select a project from the main portfolio.";
-      document.getElementById("iteration").textContent =
-        "Return to the main page to explore another project.";
-      document.getElementById("learning").textContent =
-        "Each project has its own dedicated page.";
+      document.title = "Project Not Found | Reyhan Kondapally";
+      document.getElementById("project-number").textContent = "PROJECT NOT FOUND";
+      document.getElementById("project-title").textContent = "Select a project";
+      document.getElementById("project-subtitle").textContent =
+        "Return to the homepage and select one of the 11 project boxes.";
+      document.getElementById("project-visual").style.display = "none";
+      document.getElementById("project-description").textContent =
+        "This project link could not be found. Return to the homepage to choose a project.";
+      document.getElementById("project-challenges").textContent =
+        "No project was selected.";
+      document.getElementById("project-improvements").textContent =
+        "Choose a project from the homepage to view its details.";
     }
   </script>
 </body>
