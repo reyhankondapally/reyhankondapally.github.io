@@ -1,1 +1,285 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project | Reyhan Kondapally</title>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #080d17;
+      color: #e8edf5;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.8;
+    }
+
+    a { color: #70d8ff; text-decoration: none; }
+    a:hover { color: white; }
+
+    nav {
+      padding: 20px 8%;
+      border-bottom: 1px solid #202c3d;
+    }
+
+    .logo { color: white; font-weight: bold; letter-spacing: 1px; }
+
+    main {
+      width: min(820px, 88%);
+      margin: auto;
+      padding: 55px 0 80px;
+    }
+
+    .back { display: inline-block; margin-bottom: 38px; font-size: 14px; }
+
+    .eyebrow {
+      color: #70d8ff;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    h1 {
+      font-size: clamp(34px, 6vw, 54px);
+      line-height: 1.2;
+      margin: 12px 0 18px;
+      letter-spacing: -1px;
+    }
+
+    .subtitle { color: #b9c5d7; font-size: 17px; margin-bottom: 30px; }
+
+    .hero-image {
+      width: 100%;
+      min-height: 210px;
+      aspect-ratio: 16 / 7;
+      object-fit: cover;
+      display: block;
+      margin: 28px 0 42px;
+      border: 1px solid #25354b;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #142b42, #101827);
+    }
+
+    .image-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #70d8ff;
+      letter-spacing: 1px;
+      font-size: 12px;
+      padding: 20px;
+    }
+
+    section { margin: 42px 0; }
+
+    h2 {
+      font-size: 23px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #25354b;
+    }
+
+    section p, section li { color: #b9c5d7; }
+
+    ul { padding-left: 22px; }
+    li { margin: 8px 0; }
+
+    .panel {
+      background: #101a2a;
+      border: 1px solid #25354b;
+      border-radius: 9px;
+      padding: 24px;
+    }
+
+    .panel h2 { color: #70d8ff; }
+
+    .note {
+      color: #8ea0b9;
+      font-size: 13px;
+      margin-top: 14px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      border-top: 1px solid #202c3d;
+      color: #8493a9;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a class="logo" href="index.html">RK / ENGINEERING</a>
+  </nav>
+
+  <main>
+    <a class="back" href="index.html#projects">← Back to all projects</a>
+
+    <div class="eyebrow" id="number">PROJECT</div>
+    <h1 id="title">Loading project...</h1>
+    <p class="subtitle" id="subtitle"></p>
+
+    <div class="hero-image image-placeholder" id="image">
+      ADD YOUR PROJECT PHOTO
+    </div>
+
+    <section>
+      <h2>Project Description</h2>
+      <p id="description"></p>
+    </section>
+
+    <section class="panel">
+      <h2>Challenges</h2>
+      <p id="challenges"></p>
+    </section>
+
+    <section class="panel">
+      <h2>What I Did in the Next Iteration</h2>
+      <p id="iteration"></p>
+    </section>
+
+    <section>
+      <h2>What I Learned</h2>
+      <p id="learning"></p>
+    </section>
+
+    <p class="note">
+      Replace general descriptions with your actual design decisions,
+      test results, mistakes, and improvements. Clearly distinguish
+      completed work from future plans.
+    </p>
+
+    <p style="margin-top:35px">
+      <a href="index.html#projects">← Explore more projects</a>
+    </p>
+  </main>
+
+  <footer>Reyhan Kondapally · Engineering Portfolio</footer>
+
+  <script>
+    const projects = {
+      ignisfire: {
+        number: "PROJECT 01 / AIRCRAFT SAFETY",
+        title: "IgnisFire",
+        subtitle: "Developing an AI-powered automatic fire-extinguishing system.",
+        image: "images/ignisfire.jpg",
+        imageAlt: "IgnisFire project",
+        description: "IgnisFire is my project focused on improving aircraft fire safety through an AI-powered automatic fire-extinguishing system. The goal is to develop a system that can identify a fire-related threat and respond automatically. ADD YOUR SPECIFIC DESIGN: explain what the system detects, how the AI is used, how suppression is triggered, and what you personally designed or built.",
+        challenges: "A key engineering challenge is determining how a fire can be detected reliably while avoiding false alarms. Another is deciding how the system should respond and how to verify that the response is appropriate. Describe the actual technical obstacle you encountered, the options you considered, and the evidence that helped you make a decision.",
+        iteration: "In the next iteration, I would address the most important limitation identified in testing. For example, if detection reliability is the main issue, I would test the system under a wider range of conditions and measure false positives and missed detections. Replace this example with what you actually changed or plan to test next.",
+        learning: "Describe what this project taught you about system integration, detection, automation, testing, and designing for safety. Include a concrete result or realization from your own work."
+      },
+
+      airfoil: {
+        number: "PROJECT 02 / AERODYNAMICS RESEARCH",
+        title: "Airfoil Research",
+        subtitle: "Investigating the effects of airfoil geometry and angle of attack.",
+        image: "images/airfoil-research.png",
+        imageAlt: "Airfoil research results",
+        description: "My research investigates how airfoil geometry and angle of attack affect the coefficients of lift and drag, as well as vorticity and behavior near the boundary layer. I use this question to explore the relationship between wing shape, flow behavior, and aerodynamic performance. ADD YOUR RESEARCH METHOD, AIRFOIL PROFILES, SOFTWARE, AND CONDITIONS STUDIED.",
+        challenges: "One challenge in comparing airfoils is making sure the comparison is meaningful. Angle of attack, flow speed, Reynolds number, and other conditions can affect the results. Explain which variables were difficult to control, what limitations your method had, and how you checked that your results made sense.",
+        iteration: "In the next iteration, I would compare selected airfoil geometries under consistent conditions, examine changes in lift and drag across angles of attack, and investigate how the flow field relates to the measured or calculated coefficients. Describe the comparisons you actually performed and the next analysis you intend to carry out.",
+        learning: "Explain what your results revealed about the relationship between airfoil shape, angle of attack, lift, drag, and boundary-layer behavior. Include numerical findings only when you have data to support them."
+      },
+
+      corsair: {
+        number: "PROJECT 03 / AIRCRAFT DESIGN",
+        title: "RC Corsair Design",
+        subtitle: "Exploring an inverted-gull wing through radio-controlled aircraft building.",
+        image: "images/corsair.jpg",
+        imageAlt: "My RC Corsair aircraft",
+        description: "I built a radio-controlled Corsair featuring its distinctive inverted-gull wing. The Corsair's wing geometry is an interesting design case because the inner wing bends downward before the outer wing rises. On the full-size aircraft, this arrangement helped provide propeller clearance while accommodating relatively short landing gear. Explain how your model reproduces this shape and what design decisions you made.",
+        challenges: "Translating a distinctive wing shape into a working model requires attention to alignment, structural support, weight, and balance. Describe the specific challenge you faced during construction or flight testing. If you investigated dirt-runway operations, explain the ground-clearance or landing-gear issue you were trying to solve.",
+        iteration: "For a next iteration, I would identify the biggest limitation in the original build and change one design variable at a time. Depending on the actual problem, this could mean refining wing alignment, reinforcing a joint, adjusting balance, or improving landing-gear clearance. Document the changes you made and how you evaluated their effects.",
+        learning: "Describe what building and flying the model taught you about turning a real aircraft's design features into a practical model. Explain one specific decision you would make differently now."
+      },
+
+      windtunnel: {
+        number: "PROJECT 04 / EXPERIMENTAL AERODYNAMICS",
+        title: "DIY Wind Tunnel",
+        subtitle: "Building an experimental setup to visualize airflow over wings.",
+        image: "images/wind-tunnel.jpg",
+        imageAlt: "My homemade wind tunnel",
+        description: "I built my own wind tunnel to investigate airflow over wings rather than limiting my learning to the fundamentals covered in class. The setup allowed me to explore how wing geometry and angle of attack affect the flow. ADD DETAILS ABOUT THE TUNNEL DESIGN, AIRFLOW VISUALIZATION METHOD, TEST ARTICLES, AND HOW YOU RECORDED OBSERVATIONS.",
+        challenges: "An experimental setup is only useful when its observations are meaningful. Potential issues include uneven airflow, turbulence introduced by the tunnel itself, inconsistent test conditions, and difficulty visualizing the flow clearly. Describe which of these—or another specific problem—you actually encountered and how you identified it.",
+        iteration: "In the next iteration, I would improve the part of the setup that most limits the quality of my observations. Possible improvements include making the incoming flow more uniform, improving visualization, or creating a repeatable way to vary angle of attack. State which changes you actually made and what evidence showed whether they helped.",
+        learning: "Explain what the tunnel let you observe that you could not understand as clearly from theory alone. Discuss an observation that surprised you and how it changed your understanding."
+      },
+
+      glider: {
+        number: "PROJECT 05 / FLIGHT FUNDAMENTALS",
+        title: "Balsa Wood Glider",
+        subtitle: "The first experiment that made me question why aircraft fly.",
+        image: "images/balsa-glider.jpg",
+        imageAlt: "My balsa wood glider",
+        description: "My interest in flight began when I built a balsa wood glider at age eight. During early launches, the nose pitched up, the glider stalled, and it dropped into the grass. Instead of treating every failed flight as the same mistake, I began investigating balance and launch angle. Describe the adjustments you made and how you evaluated each flight.",
+        challenges: "The challenge was understanding why the glider behaved differently from what I expected. Balance, center of gravity, launch attitude, and wing design can all influence flight. Explain what you initially misunderstood, which factor you investigated first, and how you distinguished a useful change from an inconsistent launch.",
+        iteration: "I began changing the glider's balance and launch angle instead of repeating the same launch. For the next iteration, I would record each adjustment and flight outcome more systematically, changing one variable at a time so I could better understand the effect of each change. Include any actual measurements or observations you recorded.",
+        learning: "This experience taught me to treat an unexpected result as a question worth investigating. It established the habit of testing one variable at a time and looking for an explanation instead of relying on trial and error alone."
+      },
+
+      outreach: {
+        number: "PROJECT 06 / STEM OUTREACH",
+        title: "Aerospace Club & STEM Outreach",
+        subtitle: "Sharing the science of flight through model aircraft.",
+        image: "images/aerospace-outreach.jpg",
+        imageAlt: "Aerospace club or outreach activity",
+        description: "Through my aerospace interests and club activities, I want to make aircraft building and the physics of flight accessible to other students and young builders. This project can document the club, model-building demonstrations, presentations, or lessons I have personally organized or delivered. ADD SPECIFIC ACTIVITIES AND YOUR ROLE.",
+        challenges: "One challenge in teaching engineering is making abstract ideas understandable without losing the underlying physics. Describe a specific concept, build, or activity that was difficult to explain, what questions learners had, and how you responded.",
+        iteration: "For a next iteration, I would refine the activity based on what participants found confusing or engaging. For example, I could develop a guided glider-building activity in which students change one design feature and compare flight outcomes. Replace this with a real improvement you made or a concrete next step you are planning.",
+        learning: "Explain what you learned about communicating engineering ideas, helping others troubleshoot, or designing an activity that lets students discover a physical principle themselves."
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const key = params.get("project");
+    const project = projects[key];
+
+    if (project) {
+      document.title = project.title + " | Reyhan Kondapally";
+
+      document.getElementById("number").textContent = project.number;
+      document.getElementById("title").textContent = project.title;
+      document.getElementById("subtitle").textContent = project.subtitle;
+      document.getElementById("description").textContent = project.description;
+      document.getElementById("challenges").textContent = project.challenges;
+      document.getElementById("iteration").textContent = project.iteration;
+      document.getElementById("learning").textContent = project.learning;
+
+      const imageBox = document.getElementById("image");
+      const img = document.createElement("img");
+      img.src = project.image;
+      img.alt = project.imageAlt;
+      img.className = "hero-image";
+
+      img.onerror = function () {
+        imageBox.textContent = "ADD YOUR PROJECT PHOTO";
+        imageBox.style.display = "flex";
+        imageBox.classList.add("image-placeholder");
+      };
+
+      imageBox.replaceWith(img);
+    } else {
+      document.getElementById("number").textContent = "PROJECT NOT FOUND";
+      document.getElementById("title").textContent = "Choose a project";
+      document.getElementById("subtitle").textContent =
+        "Return to the portfolio and select one of the project cards.";
+      document.getElementById("image").style.display = "none";
+      document.getElementById("description").textContent =
+        "This project link does not match an available project.";
+      document.getElementById("challenges").textContent =
+        "Select a project from the main portfolio.";
+      document.getElementById("iteration").textContent =
+        "Return to the main page to explore another project.";
+      document.getElementById("learning").textContent =
+        "Each project has its own dedicated page.";
+    }
+  </script>
+</body>
+</html>
