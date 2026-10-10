@@ -3,21 +3,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Reyhan Kondapally | Engineering Portfolio</title>
-  <meta name="description" content="Engineering portfolio featuring aerospace, experimental aerodynamics, research, and safety-system projects.">
+  <meta name="description" content="Aerospace engineering, aircraft design, aerodynamics, and independent projects.">
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       background: #080d17;
@@ -26,14 +19,8 @@
       line-height: 1.7;
     }
 
-    a {
-      color: #70d8ff;
-      text-decoration: none;
-    }
-
-    a:hover {
-      color: #ffffff;
-    }
+    a { color: #70d8ff; text-decoration: none; }
+    a:hover { color: white; }
 
     nav {
       display: flex;
@@ -43,30 +30,21 @@
       border-bottom: 1px solid #202c3d;
     }
 
-    .logo {
-      color: #ffffff;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
+    .logo { color: white; font-weight: bold; letter-spacing: 1px; }
 
-    nav a {
-      margin-left: 22px;
-      font-size: 14px;
-      color: #b9c5d7;
-    }
+    nav a { margin-left: 18px; font-size: 14px; color: #b9c5d7; }
 
     .hero {
       padding: 100px 20px 85px;
       text-align: center;
-      background:
-        radial-gradient(ellipse at top, #18334d 0%, #0b1423 48%, #080d17 78%);
+      background: radial-gradient(ellipse at top, #18334d, #0b1423 50%, #080d17 80%);
       border-bottom: 1px solid #202c3d;
     }
 
-    .eyebrow {
+    .eyebrow, .section-label {
       color: #70d8ff;
       text-transform: uppercase;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       font-size: 12px;
       font-weight: bold;
     }
@@ -79,59 +57,31 @@
     }
 
     .hero p {
-      max-width: 620px;
-      margin: 0 auto;
+      max-width: 640px;
+      margin: auto;
       color: #b5c3d6;
       font-size: 17px;
-    }
-
-    .hero-links {
-      margin-top: 30px;
     }
 
     .button {
       display: inline-block;
       padding: 11px 20px;
-      margin: 5px;
+      margin: 25px 5px 0;
       border: 1px solid #70d8ff;
       border-radius: 5px;
       font-size: 14px;
       font-weight: bold;
     }
 
-    .button.primary {
-      background: #70d8ff;
-      color: #08111c;
-    }
+    .button.primary { background: #70d8ff; color: #08111c; }
 
-    main {
-      width: min(1000px, 88%);
-      margin: auto;
-      padding: 55px 0;
-    }
+    main { width: min(1000px, 88%); margin: auto; padding: 55px 0; }
 
-    section {
-      margin-bottom: 65px;
-      scroll-margin-top: 25px;
-    }
+    section { margin-bottom: 65px; scroll-margin-top: 25px; }
 
-    .section-label {
-      color: #70d8ff;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 11px;
-      font-weight: bold;
-    }
+    h2 { font-size: 30px; margin: 8px 0 18px; }
 
-    h2 {
-      font-size: 30px;
-      margin: 8px 0 18px;
-    }
-
-    .intro {
-      max-width: 740px;
-      color: #b9c5d7;
-    }
+    .intro { max-width: 760px; color: #b9c5d7; }
 
     .projects {
       display: grid;
@@ -141,11 +91,13 @@
     }
 
     .card {
+      display: block;
+      color: inherit;
       background: #101a2a;
       border: 1px solid #25354b;
       border-radius: 10px;
       overflow: hidden;
-      transition: transform 0.2s, border-color 0.2s;
+      transition: transform .2s, border-color .2s;
     }
 
     .card:hover {
@@ -158,7 +110,6 @@
       aspect-ratio: 16 / 9;
       object-fit: cover;
       display: block;
-      background: #17263a;
     }
 
     .image-placeholder {
@@ -166,31 +117,19 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      text-align: center;
+      padding: 15px;
       background: linear-gradient(135deg, #142b42, #101827);
       color: #70d8ff;
-      font-size: 13px;
+      font-size: 12px;
       letter-spacing: 1px;
     }
 
-    .card-content {
-      padding: 24px;
-    }
+    .card-content { padding: 24px; }
+    .number { color: #70d8ff; font-size: 12px; letter-spacing: 2px; }
+    h3 { font-size: 21px; margin: 8px 0 12px; }
 
-    .number {
-      color: #70d8ff;
-      font-size: 12px;
-      letter-spacing: 2px;
-    }
-
-    h3 {
-      font-size: 21px;
-      margin: 8px 0 12px;
-    }
-
-    .card p {
-      color: #aebbd0;
-      font-size: 14px;
-    }
+    .card p { color: #aebbd0; font-size: 14px; }
 
     .tag {
       display: inline-block;
@@ -200,6 +139,14 @@
       border-radius: 4px;
       color: #8bdfff;
       font-size: 11px;
+    }
+
+    .view-project {
+      display: block;
+      margin-top: 18px;
+      color: #70d8ff;
+      font-size: 13px;
+      font-weight: bold;
     }
 
     .approach {
@@ -218,33 +165,16 @@
     }
 
     @media (max-width: 650px) {
-      nav {
-        padding: 18px 5%;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-
-      nav a {
-        margin-left: 10px;
-      }
-
-      .hero {
-        padding: 75px 20px;
-      }
-
-      .projects {
-        grid-template-columns: 1fr;
-      }
-
-      main {
-        width: 90%;
-      }
+      nav { padding: 18px 5%; flex-wrap: wrap; gap: 12px; }
+      nav a { margin-left: 10px; }
+      .hero { padding: 75px 20px; }
+      .projects { grid-template-columns: 1fr; }
+      main { width: 90%; }
     }
   </style>
 </head>
 
 <body>
-
   <nav>
     <a class="logo" href="#">RK / ENGINEERING</a>
     <div>
@@ -256,165 +186,129 @@
 
   <header class="hero">
     <div class="eyebrow">Aerospace · Research · Design</div>
-
     <h1>Reyhan Kondapally</h1>
-
     <p>
       Aspiring aerospace engineer, inventor, and builder.
       Exploring the science behind flight through hands-on
       experimentation, engineering design, and research.
     </p>
-
-    <div class="hero-links">
-      <a class="button primary" href="#projects">Explore My Work ↓</a>
-      <a class="button" href="#about">My Approach</a>
-    </div>
+    <a class="button primary" href="#projects">Explore My Work ↓</a>
   </header>
 
   <main>
-
     <section id="about">
       <div class="section-label">01 / Background</div>
       <h2>Building to Understand.</h2>
-
       <p class="intro">
         My curiosity about flight began with a balsa wood glider.
         When it stalled and dropped into the grass, I started
-        experimenting with its balance and launch angle rather
-        than simply trying again. That instinct to investigate,
-        test, and improve has shaped how I approach engineering.
-
-        Today, I explore aerospace through model aircraft,
-        experimental aerodynamics, computational analysis,
-        and engineering projects aimed at solving real problems.
+        investigating its balance and launch angle. That instinct
+        to question, test, and improve continues to shape how I
+        approach engineering.
       </p>
     </section>
 
     <section id="projects">
       <div class="section-label">02 / Selected Work</div>
       <h2>Projects & Research</h2>
-
       <p class="intro">
-        Each project represents a question I wanted to investigate,
-        a problem I wanted to solve, or a system I wanted to understand.
+        Click any project to explore its purpose, challenges,
+        and plans for the next iteration.
       </p>
 
       <div class="projects">
 
-        <article class="card">
-          <!-- To add a photo, replace this div with an img element. -->
-          <div class="image-placeholder">PROJECT PHOTO 01</div>
-
+        <a class="card" href="project.html?project=ignisfire">
+          <div class="image-placeholder">ADD IGNISFIRE PHOTO</div>
           <div class="card-content">
             <div class="number">PROJECT 01</div>
             <h3>IgnisFire</h3>
-
-            <p>
-              An AI-powered automatic fire-extinguishing system
-              developed around the challenge of improving aircraft
-              fire safety.
-
-              <!-- Add your design, detection method, testing,
-                   individual contribution, and current results. -->
-            </p>
-
+            <p>An AI-powered automatic fire-extinguishing system focused on aircraft safety.</p>
             <span class="tag">Aircraft Safety</span>
+            <span class="view-project">Explore project ↗</span>
           </div>
-        </article>
+        </a>
 
-        <article class="card">
-          <div class="image-placeholder">RESEARCH FIGURE 02</div>
-
+        <a class="card" href="project.html?project=airfoil">
+          <div class="image-placeholder">ADD RESEARCH FIGURE</div>
           <div class="card-content">
             <div class="number">PROJECT 02</div>
-            <h3>Research</h3>
-
-            <p>
-              Independent research exploring
-              how the geometry of the airfoil and angle of attack effect
-              the coefficients of lift and drag as well as vorticity along
-              the boundary layer.
-              My work focuses on "ADD THIS AFTER U FINISH OTHER THINGS".
-            </p>
-
+            <h3>Airfoil Research</h3>
+            <p>Investigating how airfoil geometry and angle of attack affect lift, drag, and boundary-layer flow.</p>
             <span class="tag">Research & Analysis</span>
+            <span class="view-project">Explore project ↗</span>
           </div>
-        </article>
+        </a>
 
-        <article class="card">
-          <div class="image-placeholder">AIRCRAFT PHOTO 03</div>
-
+        <a class="card" href="project.html?project=corsair">
+          <div class="image-placeholder">ADD YOUR CORSAIR PHOTO</div>
           <div class="card-content">
             <div class="number">PROJECT 03</div>
-            <h3>RC Aircraft Design</h3>
-
-            <p>
-              Designing, building, and flying radio-controlled
-              aircraft has helped me connect aerodynamic theory
-              with practical design decisions and flight testing.
-              I built a Corsair with an interesting "W" wing shape
-              to learn about how that altered the airflow to make
-              landings and takeoffs possible from dirt runways.
-              
-            </p>
-
+            <h3>RC Corsair Design</h3>
+            <p>Exploring the distinctive inverted-gull wing and its relationship to landing gear and ground clearance.</p>
             <span class="tag">Aircraft Design</span>
+            <span class="view-project">Explore project ↗</span>
           </div>
-        </article>
+        </a>
 
-        <article class="card">
-          <div class="image-placeholder">WIND TUNNEL / CFD 04</div>
-
+        <a class="card" href="project.html?project=windtunnel">
+          <div class="image-placeholder">ADD WIND TUNNEL PHOTO</div>
           <div class="card-content">
             <div class="number">PROJECT 04</div>
-            <h3>Experimental Aerodynamics</h3>
-
-            <p>
-              Building a wind tunnel and studying airfoils through
-              computational fluid dynamics to investigate airflow,
-              pressure, velocity, and the effects of wing geometry
-              and angle of attack.
-            </p>
-
-            <span class="tag">Aerodynamics & CFD</span>
+            <h3>DIY Wind Tunnel</h3>
+            <p>Building an experimental setup to investigate airflow over wings and the effects of design changes.</p>
+            <span class="tag">Experimental Aerodynamics</span>
+            <span class="view-project">Explore project ↗</span>
           </div>
-        </article>
+        </a>
+
+        <a class="card" href="project.html?project=glider">
+          <div class="image-placeholder">ADD GLIDER PHOTO</div>
+          <div class="card-content">
+            <div class="number">PROJECT 05</div>
+            <h3>Balsa Wood Glider</h3>
+            <p>Where my curiosity about flight began: investigating stability, balance, and why a glider stalls.</p>
+            <span class="tag">Flight Fundamentals</span>
+            <span class="view-project">Explore project ↗</span>
+          </div>
+        </a>
+
+        <a class="card" href="project.html?project=outreach">
+          <div class="image-placeholder">ADD CLUB OR BUILD PHOTO</div>
+          <div class="card-content">
+            <div class="number">PROJECT 06</div>
+            <h3>Aerospace Club & STEM Outreach</h3>
+            <p>Sharing model aircraft building and the physics of flight with other students and young builders.</p>
+            <span class="tag">Engineering Outreach</span>
+            <span class="view-project">Explore project ↗</span>
+          </div>
+        </a>
 
       </div>
     </section>
 
-    <section id="approach">
+    <section>
       <div class="section-label">03 / Engineering Philosophy</div>
       <h2>Question. Build. Test. Improve.</h2>
-
       <p class="approach">
-        I am most interested in the space between theory and reality:
-        where a prediction meets an experiment, a design encounters
-        its limitations, and unexpected results lead to better
-        questions. I want to understand not just whether something
-        works, but why it works and how it can be improved.
+        I am interested in the space between theory and reality:
+        where predictions meet experiments, designs encounter
+        limitations, and unexpected results lead to better questions.
+        I want to understand not just whether something works,
+        but why it works and how it can be improved.
       </p>
     </section>
 
     <section id="contact">
-      <div class="section-label">04 / Get in Touch</div>
+      <div class="section-label">04 / Contact</div>
       <h2>Let's Connect.</h2>
-
-      <p class="intro">
-        Interested in my projects or engineering work?
-        Feel free to reach out.
-      </p>
-
-      <p style="margin-top: 18px;">
-        <a href="mailto:YOUR_EMAIL_HERE">Email Me ↗</a>
+      <p class="intro">Interested in my projects or engineering work?</p>
+      <p style="margin-top:18px">
+        <a href="mailto:YOUR_EMAIL_HERE">Email me ↗</a>
       </p>
     </section>
-
   </main>
 
-  <footer>
-    Reyhan Kondapally · Engineering Portfolio · 2026
-  </footer>
-
+  <footer>Reyhan Kondapally · Engineering Portfolio · 2026</footer>
 </body>
 </html>
