@@ -1,0 +1,183 @@
+#include <LiquidCrystal.h>
+#include <Bonezegei_DHT11.h>
+
+// =====================================================
+// PIN ASSIGNMENTS
+// =====================================================
+
+#define DHT_PIN    7
+
+// LCD pins: RS, E, D4, D5, D6, D7
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+// DHT11 sensor
+Bonezegei_DHT11 dht(DHT_PIN);
+
+// =====================================================
+// SETTINGS
+// =====================================================
+
+// Read DHT11 once every two seconds
+const unsigned long DHT_INTERVAL = 2000;
+
+// Refresh normal LCD information once every second
+const unsigned long LCD_INTERVAL = 1000;
+
+// =====================================================
+// SYSTEM VARIABLES
+// =====================================================
+
+float temperatureF = 0.0;
+float humidity = 0.0;
+
+bool dhtReadingValid = false;
+
+unsigned long lastDHTReadTime = 0;
+unsigned long lastLCDUpdateTime = 0;
+
+// =====================================================
+// FUNCTION DECLARATIONS
+// =====================================================
+
+void readDHT11();
+void updateLCD();
+void printLCDLine(byte row, const char *message);
+
+// =====================================================
+// SETUP
+// =====================================================
+
+void setup() {
+  Serial.begin(9600);
+
+  // Start DHT11
+  dht.begin();
+
+  // Start LCD
+  lcd.begin(16, 2);
+  printLCDLine(0, "IGNISFIRE");
+  printLCDLine(1, "Starting...");
+
+  // Give DHT11 time before the first reading
+  delay(2000);
+
+  readDHT11();
+
+  unsigned long currentTime = millis();
+
+  updateLCD();
+
+  lastDHTReadTime = currentTime;
+  lastLCDUpdateTime = currentTime;
+}
+
+// =====================================================
+// MAIN LOOP
+// =====================================================
+
+void loop() {
+  unsigned long currentTime = millis();
+
+  // Read DHT11 every two seconds
+  if (currentTime - lastDHTReadTime >= DHT_INTERVAL) {
+    lastDHTReadTime = currentTime;
+    readDHT11();
+  }
+
+  // Normal LCD and Serial Monitor update
+  if (currentTime - lastLCDUpdateTime >= LCD_INTERVAL) {
+    lastLCDUpdateTime = currentTime;
+
+    updateLCD();
+
+    if (dhtReadingValid) {
+      Serial.print("Temperature: ");
+      Serial.print(temperatureF, 1);
+      Serial.print(" F | Humidity: ");
+      Serial.print(humidity, 0);
+      Serial.print(" %");
+    } else {
+      Serial.print("DHT11: Waiting for valid reading");
+    }
+  }
+}
+
+// =====================================================
+// READ DHT11
+// =====================================================
+
+void readDHT11() {
+  if (dht.getData()) {
+    float newTemperatureF = dht.getTemperature(true);
+    float newHumidity = dht.getHumidity();
+
+    // Accept only reasonable DHT11 readings
+    if (newTemperatureF >= 32.0 &&
+        newTemperatureF <= 122.0 &&
+        newHumidity >= 0.0 &&
+        newHumidity <= 100.0) {
+
+      temperatureF = newTemperatureF;
+      humidity = newHumidity;
+      dhtReadingValid = true;
+    }
+  } else {
+    // Keep the previous valid values
+    Serial.println("DHT11 read failed; keeping previous reading.");
+  }
+}
+
+// =====================================================
+// UPDATE LCD
+// =====================================================
+
+void updateLCD() {
+  char firstLine[17];
+
+  // Waiting for first valid DHT11 reading
+  if (!dhtReadingValid) {
+    printLCDLine(0, "DHT11 WAITING");
+    printLCDLine(1, "PUMP DISABLED");
+  }
+
+  // Safe state
+  else {
+    snprintf(
+        firstLine,
+        sizeof(firstLine),
+        "T:%dF H:%d%%",
+        (int)temperatureF,
+        (int)humidity
+    );
+
+    printLCDLine(0, firstLine);
+    printLCDLine(1, "STATUS: SAFE");
+  }
+}
+
+// =====================================================
+// PRINT COMPLETE LCD LINE
+// =====================================================
+
+void printLCDLine(byte row, const char *message) {
+  char line[17];
+
+  // Fill the full line with spaces
+  for (int i = 0; i < 16; i++) {
+    line[i] = ' ';
+  }
+
+  line[16] = '\0';
+
+  // Copy no more than 16 characters
+  for (
+      int i = 0;
+      i < 16 && message[i] != '\0';
+      i++
+  ) {
+    line[i] = message[i];
+  }
+
+  lcd.setCursor(0, row);
+  lcd.print(line);
+}

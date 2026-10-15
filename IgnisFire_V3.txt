@@ -1,0 +1,483 @@
+#include <LiquidCrystal.h>
+#include <Bonezegei_DHT11.h>
+
+// =====================================================
+// PIN ASSIGNMENTS
+// =====================================================
+
+#define FLAME_PIN  6
+#define DHT_PIN    7
+#define SMOKE_PIN  8
+#define BUZZER_PIN 9
+#define RELAY_PIN  10
+
+// LCD pins: RS, E, D4, D5, D6, D7
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+// DHT11 sensor
+Bonezegei_DHT11 dht(DHT_PIN);
+
+// =====================================================
+// SETTINGS
+// =====================================================
+
+// High-temperature threshold in Fahrenheit
+float highTemperatureF = 90.0;
+
+// Flame and smoke sensors are active LOW
+const int FLAME_DETECTED_STATE = LOW;
+const int SMOKE_DETECTED_STATE = LOW;
+
+// Relay polarity confirmed from your testing:
+// HIGH = relay ON
+// LOW  = relay OFF
+const int RELAY_ON  = HIGH;
+const int RELAY_OFF = LOW;
+
+// Read DHT11 once every two seconds
+const unsigned long DHT_INTERVAL = 2000;
+
+// Refresh normal LCD information once every second
+const unsigned long LCD_INTERVAL = 1000;
+
+// Intermittent buzzer timing for high temperature
+const unsigned long BEEP_ON_TIME  = 500;
+const unsigned long BEEP_OFF_TIME = 500;
+
+// Wait after pump state changes before recovering LCD
+const unsigned long LCD_RECOVERY_DELAY = 300;
+
+// While pump runs, recover LCD periodically
+const unsigned long LCD_ACTIVE_RECOVERY_INTERVAL = 1500;
+
+// =====================================================
+// SYSTEM VARIABLES
+// =====================================================
+
+float temperatureF = 0.0;
+float humidity = 0.0;
+
+bool dhtReadingValid = false;
+bool flameDetected = false;
+bool smokeDetected = false;
+bool highTemperature = false;
+
+bool pumpRequired = false;
+bool previousPumpRequired = false;
+bool buzzerOn = false;
+
+int dangerCount = 0;
+
+unsigned long lastDHTReadTime = 0;
+unsigned long lastLCDUpdateTime = 0;
+unsigned long lastBuzzerChangeTime = 0;
+unsigned long pumpTransitionTime = 0;
+unsigned long lastLCDRecoveryTime = 0;
+
+bool lcdRecoveryPending = false;
+
+// =====================================================
+// FUNCTION DECLARATIONS
+// =====================================================
+
+void readDHT11();
+void readFlameAndSmoke();
+void calculateDangerLevel();
+void controlPump(unsigned long currentTime);
+void controlBuzzer(unsigned long currentTime);
+void handleLCDRecovery(unsigned long currentTime);
+void recoverLCD();
+void updateLCD();
+void printLCDLine(byte row, const char *message);
+
+// =====================================================
+// SETUP
+// =====================================================
+
+void setup() {
+  Serial.begin(9600);
+
+  pinMode(FLAME_PIN, INPUT);
+  pinMode(SMOKE_PIN, INPUT);
+  pinMode(BUZZER_PIN, OUTPUT);
+  pinMode(RELAY_PIN, OUTPUT);
+
+  // Start safely with buzzer and pump off
+  digitalWrite(BUZZER_PIN, LOW);
+  digitalWrite(RELAY_PIN, RELAY_OFF);
+
+  // Start DHT11
+  dht.begin();
+
+  // Start LCD
+  lcd.begin(16, 2);
+  printLCDLine(0, "IGNISFIRE");
+  printLCDLine(1, "Starting...");
+
+  // Give DHT11 time before the first reading
+  delay(2000);
+
+  readFlameAndSmoke();
+  readDHT11();
+  calculateDangerLevel();
+
+  unsigned long currentTime = millis();
+
+  controlPump(currentTime);
+  updateLCD();
+
+  previousPumpRequired = pumpRequired;
+
+  lastDHTReadTime = currentTime;
+  lastLCDUpdateTime = currentTime;
+  lastBuzzerChangeTime = currentTime;
+  lastLCDRecoveryTime = currentTime;
+}
+
+// =====================================================
+// MAIN LOOP
+// =====================================================
+
+void loop() {
+  unsigned long currentTime = millis();
+
+  // Read flame and smoke continuously
+  readFlameAndSmoke();
+
+  // Read DHT11 every two seconds
+  if (currentTime - lastDHTReadTime >= DHT_INTERVAL) {
+    lastDHTReadTime = currentTime;
+    readDHT11();
+  }
+
+  // Recalculate the sensor agreement count
+  calculateDangerLevel();
+
+  // Control pump and buzzer
+  controlPump(currentTime);
+  controlBuzzer(currentTime);
+
+  // Recover LCD after pump transitions or while pump runs
+  handleLCDRecovery(currentTime);
+
+  // Normal LCD and Serial Monitor update
+  if (currentTime - lastLCDUpdateTime >= LCD_INTERVAL) {
+    lastLCDUpdateTime = currentTime;
+
+    updateLCD();
+
+    if (dhtReadingValid) {
+      Serial.print("Temperature: ");
+      Serial.print(temperatureF, 1);
+      Serial.print(" F | Humidity: ");
+      Serial.print(humidity, 0);
+      Serial.print(" %");
+    } else {
+      Serial.print("DHT11: Waiting for valid reading");
+    }
+
+    Serial.print(" | Flame: ");
+    Serial.print(flameDetected ? "YES" : "NO");
+
+    Serial.print(" | Smoke: ");
+    Serial.print(smokeDetected ? "YES" : "NO");
+
+    Serial.print(" | High temp: ");
+    Serial.print(highTemperature ? "YES" : "NO");
+
+    Serial.print(" | Danger count: ");
+    Serial.print(dangerCount);
+
+    Serial.print(" | Pump: ");
+    Serial.println(pumpRequired ? "ON" : "OFF");
+  }
+}
+
+// =====================================================
+// READ DHT11
+// =====================================================
+
+void readDHT11() {
+  if (dht.getData()) {
+    float newTemperatureF = dht.getTemperature(true);
+    float newHumidity = dht.getHumidity();
+
+    // Accept only reasonable DHT11 readings
+    if (newTemperatureF >= 32.0 &&
+        newTemperatureF <= 122.0 &&
+        newHumidity >= 0.0 &&
+        newHumidity <= 100.0) {
+
+      temperatureF = newTemperatureF;
+      humidity = newHumidity;
+      dhtReadingValid = true;
+    }
+  } else {
+    // Keep the previous valid values
+    Serial.println("DHT11 read failed; keeping previous reading.");
+  }
+}
+
+// =====================================================
+// READ FLAME AND SMOKE
+// =====================================================
+
+void readFlameAndSmoke() {
+  int flameState = digitalRead(FLAME_PIN);
+  int smokeState = digitalRead(SMOKE_PIN);
+
+  flameDetected =
+      (flameState == FLAME_DETECTED_STATE);
+
+  smokeDetected =
+      (smokeState == SMOKE_DETECTED_STATE);
+}
+
+// =====================================================
+// CALCULATE DANGER LEVEL
+// =====================================================
+
+void calculateDangerLevel() {
+  highTemperature =
+      dhtReadingValid &&
+      (temperatureF >= highTemperatureF);
+
+  dangerCount = 0;
+
+  if (flameDetected) {
+    dangerCount++;
+  }
+
+  if (smokeDetected) {
+    dangerCount++;
+  }
+
+  if (highTemperature) {
+    dangerCount++;
+  }
+
+  /*
+     Two-out-of-three suppression logic:
+
+     0 conditions = pump OFF
+     1 condition  = pump OFF, alarm only
+     2 conditions = pump ON
+     3 conditions = pump ON
+  */
+
+  pumpRequired = (dangerCount >= 2);
+}
+
+// =====================================================
+// CONTROL RELAY AND WATER PUMP
+// =====================================================
+
+void controlPump(unsigned long currentTime) {
+  if (pumpRequired) {
+    digitalWrite(RELAY_PIN, RELAY_ON);
+  } else {
+    digitalWrite(RELAY_PIN, RELAY_OFF);
+  }
+
+  // Detect pump changing from OFF to ON or ON to OFF
+  if (pumpRequired != previousPumpRequired) {
+    previousPumpRequired = pumpRequired;
+
+    pumpTransitionTime = currentTime;
+    lcdRecoveryPending = true;
+
+    Serial.println(
+        pumpRequired
+            ? "Pump changed to ON"
+            : "Pump changed to OFF"
+    );
+  }
+}
+
+// =====================================================
+// CONTROL BUZZER
+// =====================================================
+
+void controlBuzzer(unsigned long currentTime) {
+  // Flame or smoke causes a constant alarm
+  if (flameDetected || smokeDetected) {
+    digitalWrite(BUZZER_PIN, HIGH);
+
+    buzzerOn = true;
+    lastBuzzerChangeTime = currentTime;
+    return;
+  }
+
+  // High temperature alone causes intermittent beeping
+  if (highTemperature) {
+    if (buzzerOn) {
+      if (currentTime - lastBuzzerChangeTime >= BEEP_ON_TIME) {
+        buzzerOn = false;
+        lastBuzzerChangeTime = currentTime;
+        digitalWrite(BUZZER_PIN, LOW);
+      }
+    } else {
+      if (currentTime - lastBuzzerChangeTime >= BEEP_OFF_TIME) {
+        buzzerOn = true;
+        lastBuzzerChangeTime = currentTime;
+        digitalWrite(BUZZER_PIN, HIGH);
+      }
+    }
+
+    return;
+  }
+
+  // Safe condition
+  digitalWrite(BUZZER_PIN, LOW);
+
+  buzzerOn = false;
+  lastBuzzerChangeTime = currentTime;
+}
+
+// =====================================================
+// LCD RECOVERY
+// =====================================================
+
+void handleLCDRecovery(unsigned long currentTime) {
+  /*
+     Recover shortly after the relay/pump changes state.
+     This allows the electrical transient to pass first.
+  */
+
+  if (lcdRecoveryPending &&
+      currentTime - pumpTransitionTime >= LCD_RECOVERY_DELAY) {
+
+    lcdRecoveryPending = false;
+    lastLCDRecoveryTime = currentTime;
+
+    recoverLCD();
+  }
+
+  /*
+     While the pump is running, reinitialize the LCD
+     periodically in case motor noise corrupts it later.
+  */
+
+  if (pumpRequired &&
+      currentTime - lastLCDRecoveryTime >=
+          LCD_ACTIVE_RECOVERY_INTERVAL) {
+
+    lastLCDRecoveryTime = currentTime;
+
+    recoverLCD();
+  }
+}
+
+void recoverLCD() {
+  lcd.begin(16, 2);
+  updateLCD();
+
+  Serial.println("LCD recovery performed.");
+}
+
+// =====================================================
+// UPDATE LCD
+// =====================================================
+
+void updateLCD() {
+  char firstLine[17];
+
+  // All three conditions
+  if (smokeDetected &&
+      flameDetected &&
+      highTemperature) {
+
+    printLCDLine(0, "CRITICAL FIRE!");
+    printLCDLine(1, "PUMP ACTIVE");
+  }
+
+  // Smoke and flame
+  else if (smokeDetected && flameDetected) {
+    printLCDLine(0, "SMOKE + FLAME");
+    printLCDLine(1, "PUMP ACTIVE");
+  }
+
+  // Smoke and high temperature
+  else if (smokeDetected && highTemperature) {
+    printLCDLine(0, "FIRE IMMINENT!");
+    printLCDLine(1, "PUMP ACTIVE");
+  }
+
+  // Flame and high temperature
+  else if (flameDetected && highTemperature) {
+    printLCDLine(0, "FIRE DETECTED!");
+    printLCDLine(1, "PUMP ACTIVE");
+  }
+
+  // Smoke only
+  else if (smokeDetected) {
+    printLCDLine(0, "SMOKE DETECTED");
+    printLCDLine(1, "ALARM ONLY");
+  }
+
+  // Flame only
+  else if (flameDetected) {
+    printLCDLine(0, "FIRE DETECTED");
+    printLCDLine(1, "ALARM ONLY");
+  }
+
+  // High temperature only
+  else if (highTemperature) {
+    snprintf(
+        firstLine,
+        sizeof(firstLine),
+        "HIGH TEMP %dF",
+        (int)temperatureF
+    );
+
+    printLCDLine(0, firstLine);
+    printLCDLine(1, "TEMP WARNING");
+  }
+
+  // Waiting for first valid DHT11 reading
+  else if (!dhtReadingValid) {
+    printLCDLine(0, "DHT11 WAITING");
+    printLCDLine(1, "PUMP DISABLED");
+  }
+
+  // Safe state
+  else {
+    snprintf(
+        firstLine,
+        sizeof(firstLine),
+        "T:%dF H:%d%%",
+        (int)temperatureF,
+        (int)humidity
+    );
+
+    printLCDLine(0, firstLine);
+    printLCDLine(1, "STATUS: SAFE");
+  }
+}
+
+// =====================================================
+// PRINT COMPLETE LCD LINE
+// =====================================================
+
+void printLCDLine(byte row, const char *message) {
+  char line[17];
+
+  // Fill the full line with spaces
+  for (int i = 0; i < 16; i++) {
+    line[i] = ' ';
+  }
+
+  line[16] = '\0';
+
+  // Copy no more than 16 characters
+  for (
+      int i = 0;
+      i < 16 && message[i] != '\0';
+      i++
+  ) {
+    line[i] = message[i];
+  }
+
+  lcd.setCursor(0, row);
+  lcd.print(line);
+}
