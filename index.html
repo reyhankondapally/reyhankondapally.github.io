@@ -4,10 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Reyhan Kondapally's maker portfolio featuring aerospace, aircraft design, research, and engineering projects.">
-  <title>Reyhan Kondapally | Maker Portfolio</title>
+  <title>Reyhan Kondapally | Aerospace Engineering</title>
+  <meta name="description" content="Reyhan Kondapally's aerospace engineering and maker portfolio.">
 
   <style>
+    :root {
+      --bg: #080d16;
+      --panel: #101827;
+      --panel-light: #142033;
+      --text: #edf4ff;
+      --muted: #b9c5d7;
+      --cyan: #70d8ff;
+      --border: #25354b;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -16,124 +26,172 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 90px;
     }
 
     body {
-      background: #080d17;
-      color: #e8edf5;
+      background: var(--bg);
+      color: var(--text);
       font-family: Arial, Helvetica, sans-serif;
       line-height: 1.7;
     }
 
     a {
-      color: #70d8ff;
+      color: inherit;
       text-decoration: none;
     }
 
-    a:hover {
-      color: #ffffff;
+    .container {
+      width: min(1100px, 90%);
+      margin: 0 auto;
     }
 
-    nav {
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(8, 13, 22, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar {
+      min-height: 76px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
-      padding: 20px 8%;
-      border-bottom: 1px solid #202c3d;
+      gap: 20px;
     }
 
-    .logo {
-      color: #ffffff;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       font-weight: bold;
       letter-spacing: 1px;
     }
 
-    nav .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 22px;
-    }
-
-    nav .nav-links a {
-      color: #b9c5d7;
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      border: 1px solid var(--cyan);
+      border-radius: 8px;
+      color: var(--cyan);
       font-size: 14px;
     }
 
-    .hero {
-      padding: 100px 20px 85px;
-      text-align: center;
-      background: radial-gradient(
-        ellipse at top,
-        #18334d 0%,
-        #0b1423 48%,
-        #080d17 78%
-      );
-      border-bottom: 1px solid #202c3d;
+    .brand-text {
+      font-size: 13px;
+      line-height: 1.4;
     }
 
-    .eyebrow,
-    .section-label {
-      color: #70d8ff;
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    nav a {
+      color: var(--muted);
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--cyan);
+    }
+
+    .hero {
+      padding: 100px 0 95px;
+      min-height: 510px;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(ellipse at 80% 20%, rgba(36, 112, 157, 0.16), transparent 45%),
+        radial-gradient(ellipse at 10% 80%, rgba(32, 74, 122, 0.12), transparent 45%);
+    }
+
+    .eyebrow {
+      color: var(--cyan);
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       font-size: 12px;
       font-weight: bold;
+      margin-bottom: 18px;
     }
 
     h1 {
-      font-size: clamp(38px, 7vw, 70px);
-      line-height: 1.12;
-      margin: 22px 0;
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.08;
       letter-spacing: -2px;
+      max-width: 800px;
+      margin-bottom: 22px;
     }
 
-    .hero p {
-      max-width: 660px;
-      margin: auto;
-      color: #b5c3d6;
-      font-size: 17px;
+    .hero-description {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
     }
 
     .button {
       display: inline-block;
-      padding: 11px 20px;
-      margin: 28px 6px 0;
-      background: #70d8ff;
-      color: #08111c;
-      border: 1px solid #70d8ff;
-      border-radius: 5px;
+      padding: 11px 19px;
+      border-radius: 6px;
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
       font-size: 14px;
       font-weight: bold;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .button.primary {
+      background: var(--cyan);
+      color: #08111b;
     }
 
     .button:hover {
-      background: #ffffff;
-      color: #08111c;
-    }
-
-    main {
-      width: min(1050px, 88%);
-      margin: auto;
-      padding: 55px 0;
+      background: var(--cyan);
+      color: #08111b;
     }
 
     section {
-      margin-bottom: 65px;
-      scroll-margin-top: 25px;
+      padding: 78px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      color: var(--cyan);
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
 
     h2 {
-      font-size: 30px;
-      margin: 8px 0 18px;
+      font-size: clamp(30px, 4vw, 42px);
+      letter-spacing: -1px;
+      line-height: 1.2;
+      margin-bottom: 20px;
     }
 
-    .intro {
-      max-width: 780px;
-      color: #b9c5d7;
+    .section-intro {
+      max-width: 650px;
+      color: var(--muted);
+      margin-bottom: 32px;
     }
 
-    /* ABOUT ME */
+    /* ABOUT SECTION: TWO PHOTOS STACKED ON THE LEFT */
 
     .about-layout {
       display: grid;
@@ -143,159 +201,211 @@
       margin-top: 25px;
     }
 
+    .about-photos {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-width: 0;
+    }
+
     .about-photo {
       width: 100%;
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 4 / 3;
       object-fit: cover;
+      object-position: center;
       display: block;
       border-radius: 12px;
-      border: 1px solid #25354b;
+      border: 1px solid var(--border);
       background: linear-gradient(135deg, #142b42, #101827);
     }
 
     .about-copy h3 {
-      color: #70d8ff;
+      color: var(--cyan);
       font-size: 22px;
       margin-bottom: 12px;
     }
 
     .about-copy p {
-      color: #b9c5d7;
+      color: var(--muted);
       margin-bottom: 15px;
     }
 
     /* PROJECT CARDS */
 
-    .projects {
+    .projects-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
-      margin-top: 28px;
+      gap: 24px;
+      margin-top: 35px;
     }
 
-    .card {
-      display: flex;
-      flex-direction: column;
-      color: inherit;
-      background: #101a2a;
-      border: 1px solid #25354b;
-      border-radius: 10px;
+    .project-card {
       overflow: hidden;
-      min-width: 0;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
       transition: transform 0.2s, border-color 0.2s;
     }
 
-    .card:hover,
-    .card:focus-visible {
+    .project-card:hover {
       transform: translateY(-4px);
-      border-color: #70d8ff;
-      outline: none;
+      border-color: var(--cyan);
     }
 
-    .card:focus-visible {
-      box-shadow: 0 0 0 2px #70d8ff;
-    }
-
-    .card-visual {
-      position: relative;
+    .project-image {
       width: 100%;
       aspect-ratio: 16 / 9;
-      overflow: hidden;
-      background: linear-gradient(135deg, #142b42, #101827);
-      border-bottom: 1px solid #25354b;
-    }
-
-    .card-visual img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      display: block;
       object-fit: cover;
-      transition: transform 0.3s ease;
+      display: block;
+      background: var(--panel-light);
     }
 
-    .card:hover .card-visual img {
-      transform: scale(1.04);
-    }
-
-    .card-content {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      align-items: flex-start;
+    .project-content {
       padding: 23px;
     }
 
-    .number {
-      color: #70d8ff;
-      font-size: 11px;
+    .project-number {
+      color: var(--cyan);
+      font-size: 12px;
       letter-spacing: 2px;
+      margin-bottom: 8px;
     }
 
-    h3 {
-      font-size: 21px;
-      line-height: 1.4;
-      margin: 8px 0 12px;
+    .project-content h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
     }
 
-    .card p {
-      color: #aebbd0;
+    .project-content p {
+      color: var(--muted);
       font-size: 14px;
+      margin-bottom: 17px;
     }
 
-    .view-project {
-      margin-top: auto;
-      padding-top: 20px;
-      color: #70d8ff;
-      font-size: 13px;
+    .project-link {
+      color: var(--cyan);
+      font-size: 14px;
       font-weight: bold;
     }
 
-    .approach {
-      border-left: 2px solid #70d8ff;
-      padding: 8px 0 8px 22px;
-      color: #b9c5d7;
-      max-width: 780px;
+    .project-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ENGINEERING APPROACH */
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 32px;
+    }
+
+    .approach-card {
+      padding: 24px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .approach-card .number {
+      color: var(--cyan);
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .approach-card h3 {
+      margin-bottom: 8px;
+      font-size: 19px;
+    }
+
+    .approach-card p {
+      color: var(--muted);
+      font-size: 14px;
     }
 
     footer {
-      text-align: center;
-      padding: 30px 20px;
-      border-top: 1px solid #202c3d;
-      color: #8493a9;
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      color: var(--muted);
       font-size: 13px;
     }
 
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .footer-accent {
+      color: var(--cyan);
+    }
+
     @media (max-width: 650px) {
-      nav {
-        padding: 18px 5%;
-        flex-wrap: wrap;
+      .navbar {
+        min-height: 70px;
       }
 
-      nav .nav-links {
+      .brand-text {
+        font-size: 11px;
+      }
+
+      nav {
         gap: 14px;
       }
 
+      nav a {
+        font-size: 13px;
+      }
+
       .hero {
-        padding: 75px 20px;
+        padding: 75px 0;
+        min-height: auto;
       }
 
-      main {
-        width: 90%;
+      .hero-description {
+        font-size: 16px;
       }
 
-      .projects {
-        grid-template-columns: 1fr;
+      section {
+        padding: 58px 0;
       }
 
+      /* On mobile, the two photos appear above the About text. */
       .about-layout {
         grid-template-columns: 1fr;
-        gap: 22px;
+        gap: 25px;
+      }
+
+      .about-photos {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        align-items: start;
       }
 
       .about-photo {
-        max-width: 340px;
+        aspect-ratio: 3 / 4;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .approach-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .about-photos {
+        grid-template-columns: 1fr;
+      }
+
+      .about-photo {
         aspect-ratio: 4 / 3;
       }
     }
@@ -304,199 +414,235 @@
 
 <body>
 
-  <nav>
-    <a class="logo" href="#">RK / AEROSPACE ENGINEERING</a>
+  <header>
+    <div class="container navbar">
+      <a class="brand" href="#home">
+        <span class="brand-mark">RK</span>
+        <span class="brand-text">AEROSPACE<br>ENGINEERING</span>
+      </a>
 
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+      </nav>
     </div>
-  </nav>
-
-  <header class="hero">
-    <div class="eyebrow">Aerospace · Design · Experimentation</div>
-
-    <h1>Reyhan Kondapally</h1>
-
-    <p>
-      Aspiring aerospace engineer, inventor, and builder.
-      Exploring engineering through aircraft design, aerodynamic
-      research, hands-on experimentation, and mechanical systems.
-    </p>
-
-    <a class="button" href="#about">About Me ↓</a>
-    <a class="button" href="#projects">Explore My Projects ↓</a>
   </header>
 
   <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="eyebrow">Maker Portfolio · 2026</div>
+        <h1>Reyhan Kondapally</h1>
+        <p class="hero-description">
+          Aspiring aerospace engineer exploring aerodynamics, computational
+          fluid dynamics, and aircraft design through hands-on experimentation.
+        </p>
 
-    <!-- ABOUT ME -->
-
-    <section id="about">
-      <div class="section-label">01 / About</div>
-      <h2>Building to Understand</h2>
-
-      <div class="about-layout">
-
-        <!-- Your About Me photo -->
-        <img
-          class="about-photo"
-          src="images/about-me.jpg"
-          alt="Reyhan Kondapally"
-          loading="lazy"
-          onerror="this.style.display='none'"
-        >
-
-        <div class="about-copy">
-          <h3>Hi, I'm Reyhan.</h3>
-
-          <p>
-            I'm an aspiring aerospace engineer with a passion for
-            understanding how things work and turning ideas into reality.
-            My interest in aviation began with building model airplanes
-            and experimenting with their flight, which eventually grew
-            into projects involving aerodynamics, computational fluid
-            dynamics (CFD), and wind tunnel testing.
-          </p>
-
-          <p>
-            I enjoy going beyond what I learn in the classroom by
-            designing, building, testing, and improving my own projects.
-            Whether I'm studying airflow over a wing, developing new
-            aircraft systems, or bringing a CAD model to life, I'm always
-            looking for ways to learn something new. To me, engineering
-            is about more than making something work—it's about
-            understanding why it works, learning from what doesn't,
-            and using that knowledge to build something better.
-          </p>
+        <div class="hero-buttons">
+          <a class="button primary" href="#projects">Explore My Projects</a>
+          <a class="button" href="#about">About Me</a>
         </div>
+      </div>
+    </section>
 
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="section-label">01 / About</div>
+        <h2>Building to Understand</h2>
+
+        <div class="about-layout">
+
+          <!-- TWO PHOTOS, STACKED VERTICALLY -->
+          <div class="about-photos">
+            <img
+              class="about-photo"
+              src="images/about-me.jpg"
+              alt="Photo of Reyhan"
+              loading="lazy"
+              onerror="this.style.display='none'"
+            >
+
+            <img
+              class="about-photo"
+              src="images/about-me-2.jpg"
+              alt="Another photo of Reyhan"
+              loading="lazy"
+              onerror="this.style.display='none'"
+            >
+          </div>
+
+          <!-- ABOUT ME TEXT -->
+          <div class="about-copy">
+            <h3>Hi, I'm Reyhan.</h3>
+
+            <p>
+              I'm an aspiring aerospace engineer with a passion for
+              understanding how things work and turning ideas into reality.
+              My interest in aviation began with building model airplanes
+              and experimenting with their flight, which eventually grew
+              into projects involving aerodynamics, computational fluid
+              dynamics (CFD), and wind tunnel testing.
+            </p>
+
+            <p>
+              I enjoy going beyond what I learn in the classroom by
+              designing, building, testing, and improving my own projects.
+              Whether I'm studying airflow over a wing, developing new
+              aircraft systems, or bringing a CAD model to life, I'm always
+              looking for ways to learn something new. To me, engineering
+              is about more than making something work—it's about
+              understanding why it works, learning from what doesn't, and
+              using that knowledge to build something better.
+            </p>
+          </div>
+
+        </div>
       </div>
     </section>
 
     <!-- PROJECTS -->
-
     <section id="projects">
-      <div class="section-label">02 / My Work</div>
-      <h2>Projects</h2>
+      <div class="container">
+        <div class="section-label">02 / Selected Work</div>
+        <h2>Projects & Experiments</h2>
+        <p class="section-intro">
+          Each project is an opportunity to turn questions into experiments,
+          learn from the results, and improve the next design.
+        </p>
 
-      <p class="intro">
-        Explore each project to learn about its purpose, the challenges
-        I encountered, and the improvements I made or would investigate
-        in a future iteration.
-      </p>
+        <div class="projects-grid">
 
-      <div class="projects">
-
-        <!-- PROJECT 01: IGNISFIRE -->
-
-        <a class="card" href="project.html?project=ignisfire">
-          <div class="card-visual">
+          <!-- PROJECT 1 -->
+          <a class="project-card" href="project.html?project=ignisfire">
             <img
+              class="project-image"
               src="images/ignisfire-description.jpg"
-              alt="IgnisFire fire safety prototype"
+              alt="IgnisFire automatic fire extinguishing system"
               loading="lazy"
             >
-          </div>
+            <div class="project-content">
+              <div class="project-number">PROJECT 01</div>
+              <h3>IgnisFire</h3>
+              <p>
+                An automatic fire detection and extinguishing prototype
+                designed to explore ways of responding to onboard fires.
+              </p>
+              <span class="project-link">Explore Project ↗</span>
+            </div>
+          </a>
 
-          <div class="card-content">
-            <div class="number">PROJECT 01</div>
-            <h3>IgnisFire (Fire Prevention System)</h3>
-            <p>
-              An automatic fire-extinguishing system focused on
-              aircraft fire safety.
-            </p>
-            <span class="view-project">View project details ↗</span>
-          </div>
-        </a>
-
-        <!-- PROJECT 02: AIRFOIL RESEARCH -->
-
-        <a class="card" href="project.html?project=airfoil-research">
-          <div class="card-visual">
+          <!-- PROJECT 2 -->
+          <a class="project-card" href="project.html?project=airfoil-research">
             <img
+              class="project-image"
               src="images/airfoil-research-description.jpg"
-              alt="Airfoil research and CFD"
+              alt="Computational fluid dynamics airfoil research"
               loading="lazy"
             >
-          </div>
+            <div class="project-content">
+              <div class="project-number">PROJECT 02</div>
+              <h3>Airfoil Research</h3>
+              <p>
+                Using OpenFOAM and Python to simulate airflow around airfoils
+                and investigate lift, drag, and aerodynamic performance.
+              </p>
+              <span class="project-link">Explore Project ↗</span>
+            </div>
+          </a>
 
-          <div class="card-content">
-            <div class="number">PROJECT 02</div>
-            <h3>Airfoil Research</h3>
-            <p>
-              Investigating airfoil geometry, angle of attack,
-              lift, drag, and flow behavior.
-            </p>
-            <span class="view-project">View project ↗</span>
-          </div>
-        </a>
-
-        <!-- PROJECT 03: AIRFOIL IMPLEMENTATION -->
-
-        <a class="card" href="project.html?project=airfoil-implementation">
-          <div class="card-visual">
+          <!-- PROJECT 3 -->
+          <a class="project-card" href="project.html?project=airfoil-implementation">
             <img
+              class="project-image"
               src="images/airfoil-implementation-description.jpg"
-              alt="Airfoil research applied to an aircraft model"
+              alt="Undercambered airfoil used on an RC Fokker Dr.I"
               loading="lazy"
             >
-          </div>
+            <div class="project-content">
+              <div class="project-number">PROJECT 03</div>
+              <h3>Airfoil Implementation</h3>
+              <p>
+                Applying an undercambered airfoil design to a radio-controlled
+                Fokker Dr.I triplane built from lightweight foam.
+              </p>
+              <span class="project-link">Explore Project ↗</span>
+            </div>
+          </a>
 
-          <div class="card-content">
-            <div class="number">PROJECT 03</div>
-            <h3>Airfoil Implementation</h3>
-            <p>
-              Applying aerodynamic research to a radio-controlled
-              aircraft design.
-            </p>
-            <span class="view-project">View project ↗</span>
-          </div>
-        </a>
-
-        <!-- PROJECT 04: MOUSETRAP CAR -->
-
-        <a class="card" href="project.html?project=mousetrap-car">
-          <div class="card-visual">
+          <!-- PROJECT 4 -->
+          <a class="project-card" href="project.html?project=mousetrap-car">
             <img
+              class="project-image"
               src="images/mousetrap-car-description.jpg"
-              alt="Mousetrap-powered car"
+              alt="Mousetrap-powered car project"
               loading="lazy"
             >
-          </div>
+            <div class="project-content">
+              <div class="project-number">PROJECT 04</div>
+              <h3>Mousetrap Car</h3>
+              <p>
+                Experimenting with traction, wheel design, and weight
+                distribution to improve a mousetrap-powered car.
+              </p>
+              <span class="project-link">Explore Project ↗</span>
+            </div>
+          </a>
 
-          <div class="card-content">
-            <div class="number">PROJECT 04</div>
-            <h3>Mousetrap Car</h3>
-            <p>
-              Designing and building a mousetrap-powered car
-              from scratch.
-            </p>
-            <span class="view-project">View project ↗</span>
-          </div>
-        </a>
-
+        </div>
       </div>
     </section>
 
-    <!-- MY APPROACH -->
+    <!-- ENGINEERING APPROACH -->
+    <section id="approach">
+      <div class="container">
+        <div class="section-label">03 / My Approach</div>
+        <h2>Question. Build. Test. Improve.</h2>
+        <p class="section-intro">
+          I approach engineering as a cycle of curiosity and experimentation.
+          Every test provides information that helps me understand a problem
+          and make the next version better.
+        </p>
 
-    <section>
-      <div class="section-label">03 / My Approach</div>
-      <h2>Question. Build. Test. Improve.</h2>
+        <div class="approach-grid">
+          <div class="approach-card">
+            <div class="number">01 / QUESTION</div>
+            <h3>Understand the Problem</h3>
+            <p>
+              Ask why something behaves the way it does, then identify
+              the variables that might explain it.
+            </p>
+          </div>
 
-      <p class="approach">
-        I want to understand not just whether a design works, but why
-        it works, where it fails, and how evidence can guide the next
-        iteration. Each project is an opportunity to connect engineering
-        theory with practical decisions and testing.
-      </p>
+          <div class="approach-card">
+            <div class="number">02 / BUILD</div>
+            <h3>Turn Ideas Into Reality</h3>
+            <p>
+              Use simulations, programming, CAD, and hands-on construction
+              to develop and investigate a design.
+            </p>
+          </div>
+
+          <div class="approach-card">
+            <div class="number">03 / IMPROVE</div>
+            <h3>Learn From Testing</h3>
+            <p>
+              Analyze results, troubleshoot problems, and use what I learn
+              to make the next iteration better.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
-
   </main>
 
+  <!-- FOOTER -->
   <footer>
-    Reyhan Kondapally · Maker Portfolio · 2026
+    <div class="container footer-content">
+      <span>Reyhan Kondapally · Maker Portfolio · 2026</span>
+      <span class="footer-accent">Built through curiosity and experimentation.</span>
+    </div>
   </footer>
 
 </body>
