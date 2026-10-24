@@ -294,9 +294,10 @@
     <!-- STANDARD DESCRIPTION IMAGE FOR OTHER PROJECTS -->
     <div class="section-photo" id="description-photo"></div>
 
-    <!-- AIRFOIL IMPLEMENTATION GALLERY -->
+    <!-- AIRFOIL IMPLEMENTATION GALLERY: ALL 17 PHOTOS -->
     <div class="photo-gallery" id="airfoil-implementation-gallery">
 
+      <!-- Original five photos -->
       <figure class="gallery-item">
         <img src="images/six.jpg"
              alt="Airfoil Implementation photo"
@@ -332,69 +333,89 @@
              onerror="this.style.display='none'">
       </figure>
 
-    </div>
-
-    <!-- FOKKER DR1 GALLERY -->
-    <div class="photo-gallery" id="fokker-dr1-gallery">
-
+      <!-- Twelve additional photos -->
       <figure class="gallery-item">
-        <img src="images/module.jpg" alt="Fokker DR1 build photo"
-             loading="lazy" onerror="this.style.display='none'">
+        <img src="images/module.jpg"
+             alt="Aircraft build photo"
+             loading="lazy"
+             onerror="this.style.display='none'">
       </figure>
 
       <figure class="gallery-item">
-        <img src="images/rates.jpg" alt="Fokker DR1 build photo"
-             loading="lazy" onerror="this.style.display='none'">
+        <img src="images/rates.jpg"
+             alt="Aircraft build photo"
+             loading="lazy"
+             onerror="this.style.display='none'">
       </figure>
 
       <figure class="gallery-item">
-        <img src="images/glue.jpg" alt="Fokker DR1 build photo"
-             loading="lazy" onerror="this.style.display='none'">
+        <img src="images/glue.jpg"
+             alt="Aircraft construction"
+             loading="lazy"
+             onerror="this.style.display='none'">
       </figure>
 
       <figure class="gallery-item">
-        <img src="images/bind.jpg" alt="Fokker DR1 build photo"
-             loading="lazy" onerror="this.style.display='none'">
+        <img src="images/bind.jpg"
+             alt="Aircraft setup"
+             loading="lazy"
+             onerror="this.style.display='none'">
       </figure>
 
       <figure class="gallery-item">
-        <img src="images/skewer.jpg" alt="Fokker DR1 build photo"
-             loading="lazy" onerror="this.style.display='none'">
+        <img src="images/skewer.jpg"
+             alt="Aircraft reinforcement"
+             loading="lazy"
+             onerror="this.style.display='none'">
       </figure>
 
       <figure class="gallery-item">
-        <img src="images/esc.jpg" alt="Fokker DR1 build photo"
-             loading="lazy" onerror="this.style.display='none'">
+        <img src="images/esc.jpg"
+             alt="Electronic speed controller"
+             loading="lazy"
+             onerror="this.style.display='none'">
       </figure>
 
       <figure class="gallery-item">
-        <img src="images/inside.jpg" alt="Fokker DR1 build photo"
-             loading="lazy" onerror="this.style.display='none'">
+        <img src="images/inside.jpg"
+             alt="Internal aircraft components"
+             loading="lazy"
+             onerror="this.style.display='none'">
       </figure>
 
       <figure class="gallery-item">
-        <img src="images/moun.jpg" alt="Fokker DR1 build photo"
-             loading="lazy" onerror="this.style.display='none'">
+        <img src="images/moun.jpg"
+             alt="Aircraft construction"
+             loading="lazy"
+             onerror="this.style.display='none'">
       </figure>
 
       <figure class="gallery-item">
-        <img src="images/mount.jpg" alt="Fokker DR1 build photo"
-             loading="lazy" onerror="this.style.display='none'">
+        <img src="images/mount.jpg"
+             alt="Aircraft mounting"
+             loading="lazy"
+             onerror="this.style.display='none'">
       </figure>
 
       <figure class="gallery-item">
-        <img src="images/rx.jpg" alt="Fokker DR1 build photo"
-             loading="lazy" onerror="this.style.display='none'">
+        <img src="images/rx.jpg"
+             alt="Aircraft receiver"
+             loading="lazy"
+             onerror="this.style.display='none'">
       </figure>
 
       <figure class="gallery-item">
-        <img src="images/servo.jpg" alt="Fokker DR1 build photo"
-             loading="lazy" onerror="this.style.display='none'">
+        <img src="images/servo.jpg"
+             alt="Aircraft servo"
+             loading="lazy"
+             onerror="this.style.display='none'">
       </figure>
 
       <figure class="gallery-item">
-        <img src="images/motorsp.jpg" alt="Fokker DR1 build photo"
-             loading="lazy" onerror="this.style.display='none'">
+        <img src="images/motorsp.jpg"
+             alt="Aircraft motor and propeller"
+             loading="lazy"
+             onerror="this.style.display='none'">
       </figure>
 
     </div>
@@ -711,10 +732,6 @@
           document.getElementById("airfoil-implementation-gallery").classList.add("visible");
           document.getElementById("description-photo").hidden = true;
 
-        } else if (key === "fokker-dr1") {
-          document.getElementById("fokker-dr1-gallery").classList.add("visible");
-          document.getElementById("description-photo").hidden = true;
-
         } else {
           loadSectionImage("description-photo", "description", "description");
         }
@@ -739,7 +756,6 @@
       document.getElementById("standard-improvements").hidden = true;
       document.getElementById("improvements-photo").hidden = true;
       document.getElementById("airfoil-implementation-gallery").hidden = true;
-      document.getElementById("fokker-dr1-gallery").hidden = true;
       document.getElementById("ignisfire-layout").hidden = true;
     }
   </script>
