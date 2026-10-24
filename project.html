@@ -112,6 +112,48 @@
       background: #101827;
     }
 
+    /* AIRFOIL IMPLEMENTATION PHOTO GALLERY */
+    .photo-gallery {
+      display: none;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin: 28px 0 42px;
+      align-items: start;
+    }
+
+    .photo-gallery.visible {
+      display: grid;
+    }
+
+    .gallery-item {
+      min-width: 0;
+      overflow: hidden;
+      background: #101827;
+      border: 1px solid #25354b;
+      border-radius: 10px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-3px);
+      border-color: #70d8ff;
+    }
+
+    .gallery-item img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: contain;
+      background: #101827;
+    }
+
+    .gallery-item figcaption {
+      padding: 9px 10px;
+      color: #b9c5d7;
+      font-size: 13px;
+      text-align: center;
+    }
+
     .image-placeholder {
       min-height: 130px;
       display: flex;
@@ -137,7 +179,7 @@
 
     .detail-panel h2 { color: #70d8ff; }
 
-    /* IgnisFire version layout */
+    /* IGNISFIRE VERSION LAYOUT */
     .version-section {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -211,6 +253,11 @@
       main { width: 90%; }
       .detail-panel { padding: 19px; }
 
+      .photo-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
       .version-section {
         grid-template-columns: 1fr;
         gap: 18px;
@@ -246,8 +293,63 @@
       <p id="project-description"></p>
     </section>
 
-    <!-- Standard layout for the other projects -->
+    <!-- STANDARD DESCRIPTION IMAGE FOR OTHER PROJECTS -->
     <div class="section-photo" id="description-photo"></div>
+
+    <!-- AIRFOIL IMPLEMENTATION GALLERY: EXACT ORDER REQUESTED -->
+    <div class="photo-gallery" id="airfoil-implementation-gallery">
+
+      <figure class="gallery-item">
+        <img
+          src="images/six.jpg"
+          alt="Airfoil Implementation: six"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        >
+        <figcaption>Six</figcaption>
+      </figure>
+
+      <figure class="gallery-item">
+        <img
+          src="images/eight.jpg"
+          alt="Airfoil Implementation: eight"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        >
+        <figcaption>Eight</figcaption>
+      </figure>
+
+      <figure class="gallery-item">
+        <img
+          src="images/on-foam.jpg"
+          alt="Airfoil mounted on the foam aircraft"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        >
+        <figcaption>On Foam</figcaption>
+      </figure>
+
+      <figure class="gallery-item">
+        <img
+          src="images/wing-structure.jpg"
+          alt="Structure of the aircraft wing"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        >
+        <figcaption>Wing Structure</figcaption>
+      </figure>
+
+      <figure class="gallery-item">
+        <img
+          src="images/no-dihedral.jpg"
+          alt="Aircraft wing configuration without dihedral"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        >
+        <figcaption>No Dihedral</figcaption>
+      </figure>
+
+    </div>
 
     <section class="detail-panel" id="standard-challenges">
       <h2>Challenges</h2>
@@ -263,7 +365,7 @@
 
     <div class="section-photo" id="improvements-photo"></div>
 
-    <!-- Custom layout for IgnisFire only -->
+    <!-- CUSTOM LAYOUT FOR IGNISFIRE ONLY -->
     <div id="ignisfire-layout" hidden>
 
       <section class="version-section">
@@ -274,10 +376,7 @@
         <div class="version-copy">
           <h2>Version One</h2>
           <p id="version-one-text">In version 1, I built a simple prototype of the IgnisFire system. It had a temperature and humidity sensor, a Liquid Crystal Display, and a buzzer. I coded the system to show an alert every time the temperature went too high and I displayed text on the screen.</p>
-          <a class="code-link"
-             href="IgnisFire_V1.txt" target="_blank" rel="noopener noreferrer">
-            Click here to view my Arduino code ↗
-          </a>
+          <a class="code-link" href="IgnisFire_V1.txt" target="_blank" rel="noopener noreferrer">Click here to view my Arduino code ↗</a>
         </div>
       </section>
 
@@ -289,11 +388,7 @@
         <div class="version-copy">
           <h2>Version Two</h2>
           <p id="version-two-text">In version 2, I added a fire sensor and an M2 smoke sensor as well as the water pump. This allowed me to get multiple readings on what was happening. Adding the smoke sensor was needed because we could now use two different systems to predict and detect fires. On the other hand, if a fire sensor detects fire, there will be no second sensor confirmation. Fire prediction is also possible using a combination of sensors. Using the temperature sensor and smoke sensor, we can predict that a fire may occur in a certain area if we get two high readings on the temperature and smoke sensor. The water pump is activated when we have a high temperature and smoke warning or when we have a fire warning from the fire sensor. The water pump is giving electrical interference to the screen and corrupting data coming to the screen. Random characters are appearing on the screen.</p>
-
-          <a class="code-link"
-             href="IgnisFire_V2.txt" target="_blank" rel="noopener noreferrer">
-            Click here to view my Arduino code ↗
-          </a>
+          <a class="code-link" href="IgnisFire_V2.txt" target="_blank" rel="noopener noreferrer">Click here to view my Arduino code ↗</a>
         </div>
       </section>
 
@@ -305,11 +400,7 @@
         <div class="version-copy">
           <h2>Version Three</h2>
           <p id="version-three-text">In version 3, I have solved the electrical interference problem. To solve the electrical interference problem, I added a 100 microfarad capacitor between the 5V and the ground pins of my LCD screen. I also added a 100 microfarad capacitor between the positive and negative wires of the water pump. I also put a diode between the positive and negative wires of the water pump. After doing all of this, I was still receiving some electrical interference mainly due to the magnetic field generated by the magnets spinning the motor. The only way to solve this (because I didn't have a chamber to block the magnetic field) was through moving the pump far away. I moved the pump two feet away from the rest of the circuit. After that I received little to no interference on the screen.</p>
-          
-          <a class="code-link"
-             href="IgnisFire_V3.txt" target="_blank" rel="noopener noreferrer">
-            Click here to view my Arduino code ↗
-          </a>
+          <a class="code-link" href="IgnisFire_V3.txt" target="_blank" rel="noopener noreferrer">Click here to view my Arduino code ↗</a>
         </div>
       </section>
 
@@ -343,10 +434,10 @@
           "I created IgnisFire to help combat in-flight fires, particularly on cargo aircraft although it will be extended to commercial aircraft in the future. While researching aircraft accidents, I learned about UPS Flight 6, which crashed near Dubai following an in-flight cargo fire. This motivated me to explore whether an automatic detection and suppression system could respond to a fire threat. My prototype uses a temperature and humidity sensor, a smoke sensor, a fire sensor, an Arduino, an LCD screen, a relay, and a water pump. The prototype uses water for demonstration. My real aircraft application would require an appropriate aircraft-approved extinguishing agent (most likely fire foam) and extensive safety testing. The system is designed to activate the pump when two different sensors report high-alert readings. When there is a fire-sensor warning the system will automatically extinguish the fire. There were many challenges in this project, but I was able to create solutions for them.",
 
         challenges:
-          "There were several challenges as I listed in the different versions. Most of my challenges came from coding and figuring out the problems with my physical design (such as electrical interference). My coding problems origianted from now being well versed in Python but not C++ (language Arduino uses). I learned C++ as I went along with my project. Another issue I ran into was the hardware issues of electrical interference from the pump which was corrupting the data getting sent to the LCD display.",
+          "There were several challenges as I listed in the different versions. Most of my challenges came from coding and figuring out the problems with my physical design (such as electrical interference). My coding problems originated from not being well versed in C++ (the language Arduino uses). I learned C++ as I went along with my project. Another issue I ran into was electrical interference from the pump, which was corrupting the data getting sent to the LCD display.",
 
         improvements:
-          "In a future version, I would build a structured platform with several mounting positions for the pump, allowing me to test different distances from the circuit board. I would also account for electrical interference when planning the circuit layout. I would also develop a system to figure out where the fire is using a surround sensor system. Using that I could only activate select fire extinguishing systems for a certain area as to keep the fire from spreading. "
+          "In a future version, I would build a structured platform with several mounting positions for the pump, allowing me to test different distances from the circuit board. I would also account for electrical interference when planning the circuit layout. I would also develop a system to figure out where the fire is using a surrounding sensor system. Using that, I could activate only selected fire-extinguishing systems for a certain area to help keep the fire from spreading."
       },
 
       "airfoil-research": {
@@ -354,10 +445,13 @@
         title: "Airfoil Research",
         subtitle: "Investigating airfoil geometry, angle of attack, and flow behavior",
         photo: "images/airfoil-research-hero.jpg",
+
         description:
           "I used OpenFOAM 13 to simulate airflow around airfoils and investigate how wing geometry and flow conditions affect aerodynamic performance. To create the airfoil geometry, I developed a Python script that generated the coordinate points defining the wing's shape. This allowed me to establish the geometry needed for my computational fluid dynamics (CFD) simulations and study the resulting airflow. I also created a separate script to extract and organize simulation data, including the coefficients of lift and drag and temperature distributions. By analyzing these results, I could better understand how the airfoil interacted with the surrounding airflow and how its aerodynamic characteristics changed under different conditions. Through this project, I combined Python programming and CFD to explore the relationship between wing design and aerodynamic performance. It also gave me experience developing a workflow that connected geometry generation, numerical simulation, and data analysis, allowing me to investigate aerodynamic behavior through computational experimentation.",
+
         challenges:
           "One of the biggest challenges in this project was developing a reliable workflow between Python and OpenFOAM 13. Creating a Python script to generate the airfoil's coordinate points required careful attention to the geometry, since the points needed to accurately represent the wing's shape for the CFD simulations. Another challenge was extracting and organizing useful data from the simulations. I developed a separate script to obtain the lift and drag coefficients and temperature information, allowing me to evaluate the airfoil's aerodynamic performance. Ensuring that the scripts produced usable data and that the simulation results could be interpreted correctly required troubleshooting and careful analysis. Working through these challenges helped me improve my programming skills and better understand the process of turning a computational model into meaningful aerodynamic results.",
+
         improvements:
           "In future iterations, I would expand my Python scripts to automate more of the CFD workflow, making it easier to generate airfoil geometries, configure simulations, and extract and compare results. I would also investigate a wider range of airfoil shapes, angles of attack, and flow conditions to understand how each variable influences aerodynamic performance. By systematically comparing the coefficients of lift and drag, I could evaluate how effectively different designs generate lift while minimizing drag. I would further analyze temperature and velocity distributions to gain a more complete understanding of the flow field surrounding each airfoil. Another improvement would be to investigate both compressible and incompressible flow regimes. This would allow me to explore how aerodynamic behavior changes as airflow speed increases, including the development of shockwaves and their effects on drag and overall efficiency. I would also refine my data-processing scripts to organize simulation results into graphs and comparative visualizations, making trends between different airfoil designs easier to identify. Finally, I would aim to validate my CFD results against theoretical calculations or experimental data from wind tunnel testing. Combining computational simulations with physical experiments would help me assess the accuracy of my models and develop a more reliable understanding of how airfoils perform under real-world conditions."
       },
@@ -367,10 +461,13 @@
         title: "Airfoil Implementation",
         subtitle: "Applying aerodynamic research to aircraft design",
         photo: "images/airfoil-implementation-hero.jpg",
+
         description:
           "Using OpenFOAM 13, I developed an undercambered airfoil designed to generate high lift at low flight speeds. Through computational fluid dynamics (CFD) simulations, I studied airflow and pressure distributions to understand how the airfoil's geometry influenced its aerodynamic performance. I learned that increasing the airfoil's camber could generate substantial lift, but it also increased drag, reducing the aircraft's speed. For the foam aircraft I built, this trade-off was important: the additional drag helped limit the speed the aircraft could reach, reducing the risk of aerodynamic loads damaging its lightweight foam structure. I then applied my undercambered airfoil design to a radio-controlled (RC) Fokker Dr.I that I built, incorporating it into all three of the aircraft's separate wings. Building the triplane allowed me to take my research beyond computer simulations and apply my understanding of aerodynamics to a physical model. By combining CFD analysis with hands-on aircraft construction, I explored how airfoil geometry affects lift, drag, and the practical design considerations involved in building a lightweight RC aircraft.",
+
         challenges:
           "One of the biggest challenges was achieving stable flight. During testing, I found that the aircraft was not stable enough, so I decided to increase the camber of each wing by 6 degrees to improve its aerodynamic characteristics. This required me to reconsider how the wing geometry affected the aircraft's overall flight behavior. Another challenge was the strength of the landing gear struts. The original design was not strong enough to support the aircraft reliably, so I had to reinforce the struts to create a sturdier structure. These challenges taught me that designing an aircraft involves more than developing an airfoil that generates lift. Stability, structural integrity, and the interaction between aerodynamic performance and physical construction are equally important when turning a design into a functional RC aircraft.",
+
         improvements:
           "In future iterations, I would refine the airfoil design through additional CFD simulations to better understand how different camber angles affect lift, drag, and flight stability. I would also test different camber configurations across the three wings to determine whether adjusting each wing individually could improve the aircraft's overall handling. Additionally, I would further reinforce the landing gear struts while minimizing unnecessary weight, ensuring the structure could withstand landings without compromising flight performance. I would also explore ways to improve the aircraft's stability through adjustments to its wing alignment and overall configuration. By combining further simulations with repeated flight testing, I could identify areas for improvement and develop a more stable, durable, and aerodynamically efficient RC Fokker Dr.I."
       },
@@ -433,7 +530,7 @@
         subtitle: "Designing and building a mousetrap car from scratch",
         photo: "",
         description:
-          "I built a mousetrap-powered car from scratch. Its performance depended on factors such as traction, wheel alignment, friction, and how the stored energy was transferred to the axle.",
+          "In 6th grade I built a mousetrap-powered car for a science project. I visualized the design in my head and was accurately able to create that using balsa wood, CDs, a mousetrap, string, wood glue, and hot glue.",
         challenges:
           "The CD wheels initially slipped on the wooden floor, reducing traction and affecting the car's movement.",
         improvements:
@@ -562,7 +659,15 @@
       } else {
         document.getElementById("ignisfire-layout").hidden = true;
 
-        loadSectionImage("description-photo", "description", "description");
+        if (key === "airfoil-implementation") {
+          /* Show the gallery and hide the single full-width description image. */
+          document.getElementById("airfoil-implementation-gallery").classList.add("visible");
+          document.getElementById("description-photo").hidden = true;
+        } else {
+          /* Keep the existing description image for other projects. */
+          loadSectionImage("description-photo", "description", "description");
+        }
+
         loadSectionImage("challenges-photo", "challenges", "challenges");
         loadSectionImage("improvements-photo", "improvements", "improvements");
       }
@@ -573,7 +678,7 @@
       document.getElementById("project-number").textContent = "PROJECT NOT FOUND";
       document.getElementById("project-title").textContent = "Select a project";
       document.getElementById("project-subtitle").textContent =
-        "Return to the homepage and select one of the 11 project boxes.";
+        "Return to the homepage and select a project.";
 
       document.getElementById("project-visual").hidden = true;
       document.getElementById("description-section").hidden = true;
@@ -582,6 +687,7 @@
       document.getElementById("challenges-photo").hidden = true;
       document.getElementById("standard-improvements").hidden = true;
       document.getElementById("improvements-photo").hidden = true;
+      document.getElementById("airfoil-implementation-gallery").hidden = true;
       document.getElementById("ignisfire-layout").hidden = true;
     }
   </script>
