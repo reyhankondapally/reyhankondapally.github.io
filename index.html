@@ -208,6 +208,7 @@
       min-width: 0;
     }
 
+   
     .about-photo {
       width: 100%;
       aspect-ratio: 4 / 3;
@@ -218,6 +219,12 @@
       border: 1px solid var(--border);
       background: linear-gradient(135deg, #142b42, #101827);
     }
+
+    /* Keep the football photo focused higher up */
+    img[src="images/about-me-2.jpg"] {
+      object-position: center 15%;
+    }
+
 
     .about-copy h3 {
       color: var(--cyan);
