@@ -112,7 +112,7 @@
       background: #101827;
     }
 
-    /* AIRFOIL IMPLEMENTATION PHOTO GALLERY */
+    /* SHARED IMAGE GALLERY STYLE */
     .photo-gallery {
       display: none;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -147,11 +147,9 @@
       background: #101827;
     }
 
+    /* No visible filename captions */
     .gallery-item figcaption {
-      padding: 9px 10px;
-      color: #b9c5d7;
-      font-size: 13px;
-      text-align: center;
+      display: none;
     }
 
     .image-placeholder {
@@ -296,57 +294,107 @@
     <!-- STANDARD DESCRIPTION IMAGE FOR OTHER PROJECTS -->
     <div class="section-photo" id="description-photo"></div>
 
-    <!-- AIRFOIL IMPLEMENTATION GALLERY: EXACT ORDER REQUESTED -->
+    <!-- AIRFOIL IMPLEMENTATION GALLERY -->
     <div class="photo-gallery" id="airfoil-implementation-gallery">
 
       <figure class="gallery-item">
-        <img
-          src="images/six.jpg"
-          alt="Airfoil Implementation: six"
-          loading="lazy"
-          onerror="this.style.display='none'"
-        >
-        <figcaption>Six</figcaption>
+        <img src="images/six.jpg"
+             alt="Airfoil Implementation photo"
+             loading="lazy"
+             onerror="this.style.display='none'">
       </figure>
 
       <figure class="gallery-item">
-        <img
-          src="images/eight.jpg"
-          alt="Airfoil Implementation: eight"
-          loading="lazy"
-          onerror="this.style.display='none'"
-        >
-        <figcaption>Eight</figcaption>
+        <img src="images/eight.jpg"
+             alt="Airfoil Implementation photo"
+             loading="lazy"
+             onerror="this.style.display='none'">
       </figure>
 
       <figure class="gallery-item">
-        <img
-          src="images/on-foam.jpg"
-          alt="Airfoil mounted on the foam aircraft"
-          loading="lazy"
-          onerror="this.style.display='none'"
-        >
-        <figcaption>On Foam</figcaption>
+        <img src="images/on-foam.jpg"
+             alt="Airfoil mounted on the foam aircraft"
+             loading="lazy"
+             onerror="this.style.display='none'">
       </figure>
 
       <figure class="gallery-item">
-        <img
-          src="images/wing-structure.jpg"
-          alt="Structure of the aircraft wing"
-          loading="lazy"
-          onerror="this.style.display='none'"
-        >
-        <figcaption>Wing Structure</figcaption>
+        <img src="images/wing-structure.jpg"
+             alt="Structure of the aircraft wing"
+             loading="lazy"
+             onerror="this.style.display='none'">
       </figure>
 
       <figure class="gallery-item">
-        <img
-          src="images/no-dihedral.jpg"
-          alt="Aircraft wing configuration without dihedral"
-          loading="lazy"
-          onerror="this.style.display='none'"
-        >
-        <figcaption>No Dihedral</figcaption>
+        <img src="images/no-dihedral.jpg"
+             alt="Aircraft wing configuration without dihedral"
+             loading="lazy"
+             onerror="this.style.display='none'">
+      </figure>
+
+    </div>
+
+    <!-- FOKKER DR1 GALLERY -->
+    <div class="photo-gallery" id="fokker-dr1-gallery">
+
+      <figure class="gallery-item">
+        <img src="images/module.jpg" alt="Fokker DR1 build photo"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/rates.jpg" alt="Fokker DR1 build photo"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/glue.jpg" alt="Fokker DR1 build photo"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/bind.jpg" alt="Fokker DR1 build photo"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/skewer.jpg" alt="Fokker DR1 build photo"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/esc.jpg" alt="Fokker DR1 build photo"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/inside.jpg" alt="Fokker DR1 build photo"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/moun.jpg" alt="Fokker DR1 build photo"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/mount.jpg" alt="Fokker DR1 build photo"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/rx.jpg" alt="Fokker DR1 build photo"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/servo.jpg" alt="Fokker DR1 build photo"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/motor sp.jpg" alt="Fokker DR1 build photo"
+             loading="lazy" onerror="this.style.display='none'">
       </figure>
 
     </div>
@@ -660,11 +708,14 @@
         document.getElementById("ignisfire-layout").hidden = true;
 
         if (key === "airfoil-implementation") {
-          /* Show the gallery and hide the single full-width description image. */
           document.getElementById("airfoil-implementation-gallery").classList.add("visible");
           document.getElementById("description-photo").hidden = true;
+
+        } else if (key === "fokker-dr1") {
+          document.getElementById("fokker-dr1-gallery").classList.add("visible");
+          document.getElementById("description-photo").hidden = true;
+
         } else {
-          /* Keep the existing description image for other projects. */
           loadSectionImage("description-photo", "description", "description");
         }
 
@@ -688,6 +739,7 @@
       document.getElementById("standard-improvements").hidden = true;
       document.getElementById("improvements-photo").hidden = true;
       document.getElementById("airfoil-implementation-gallery").hidden = true;
+      document.getElementById("fokker-dr1-gallery").hidden = true;
       document.getElementById("ignisfire-layout").hidden = true;
     }
   </script>
