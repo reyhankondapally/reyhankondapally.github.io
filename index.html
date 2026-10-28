@@ -208,7 +208,6 @@
       min-width: 0;
     }
 
-   
     .about-photo {
       width: 100%;
       aspect-ratio: 4 / 3;
@@ -224,7 +223,6 @@
     img[src="images/about-me-2.jpg"] {
       object-position: center 20%;
     }
-
 
     .about-copy h3 {
       color: var(--cyan);
@@ -257,6 +255,66 @@
     .project-card:hover {
       transform: translateY(-4px);
       border-color: var(--cyan);
+    }
+
+    /* YOUTUBE CARD: SPANS THE FULL WIDTH OF TWO PROJECT CARDS */
+
+    .youtube-card {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      align-items: stretch;
+    }
+
+    .youtube-visual {
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding: 28px;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at center, rgba(112, 216, 255, 0.14), transparent 65%),
+        linear-gradient(135deg, #142033, #0b1220);
+      border-right: 1px solid var(--border);
+    }
+
+    .youtube-play {
+      width: 82px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: #ff0033;
+      color: white;
+      font-size: 30px;
+      line-height: 1;
+      box-shadow: 0 8px 28px rgba(255, 0, 51, 0.2);
+    }
+
+    .youtube-visual-label {
+      color: var(--cyan);
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+
+    .youtube-card .project-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 32px;
+    }
+
+    .youtube-card .project-content p {
+      max-width: 540px;
+    }
+
+    .youtube-card .project-link {
+      margin-top: 2px;
     }
 
     .project-image {
@@ -400,6 +458,20 @@
 
       .projects-grid {
         grid-template-columns: 1fr;
+      }
+
+      .youtube-card {
+        grid-template-columns: 1fr;
+      }
+
+      .youtube-visual {
+        min-height: 190px;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .youtube-card .project-content {
+        padding: 23px;
       }
 
       .approach-grid {
@@ -594,6 +666,31 @@
                 distribution to improve a mousetrap-powered car.
               </p>
               <span class="project-link">Explore Project ↗</span>
+            </div>
+          </a>
+
+          <!-- PROJECT 05: YOUTUBE CHANNEL, FULL WIDTH -->
+          <a
+            class="project-card youtube-card"
+            href="https://www.youtube.com/@TogaSimulations14"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit the Toga Simulations YouTube channel (opens in a new tab)"
+          >
+            <div class="youtube-visual" aria-hidden="true">
+              <div class="youtube-play">▶</div>
+              <div class="youtube-visual-label">TOGA SIMULATIONS</div>
+            </div>
+
+            <div class="project-content">
+              <div class="project-number">PROJECT 05 / VIDEO CHANNEL</div>
+              <h3>Toga Simulations on YouTube</h3>
+              <p>
+                Visit my YouTube channel to explore my simulations and other
+                engineering-related content. The channel brings my interests
+                in aerospace, aircraft, and digital experimentation to video.
+              </p>
+              <span class="project-link">Visit YouTube Channel ↗</span>
             </div>
           </a>
 
