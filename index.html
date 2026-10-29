@@ -103,6 +103,8 @@
       color: var(--cyan);
     }
 
+    /* HERO */
+
     .hero {
       padding: 100px 0 95px;
       min-height: 510px;
@@ -164,6 +166,8 @@
       color: #08111b;
     }
 
+    /* GENERAL SECTIONS */
+
     section {
       padding: 78px 0;
       border-top: 1px solid var(--border);
@@ -191,7 +195,7 @@
       margin-bottom: 32px;
     }
 
-    /* ABOUT SECTION: TWO PHOTOS STACKED ON THE LEFT */
+    /* ABOUT ME */
 
     .about-layout {
       display: grid;
@@ -216,10 +220,9 @@
       display: block;
       border-radius: 12px;
       border: 1px solid var(--border);
-      background: linear-gradient(135deg, #142b42, #101827);
+      background: var(--panel);
     }
 
-    /* Keep the football photo focused higher up */
     img[src="images/about-me-2.jpg"] {
       object-position: center 20%;
     }
@@ -235,16 +238,18 @@
       margin-bottom: 15px;
     }
 
-    /* PROJECT CARDS */
+    /* PROJECT GRID */
 
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px;
       margin-top: 35px;
+      align-items: stretch;
     }
 
     .project-card {
+      min-width: 0;
       overflow: hidden;
       background: var(--panel);
       border: 1px solid var(--border);
@@ -257,71 +262,11 @@
       border-color: var(--cyan);
     }
 
-    /* YOUTUBE CARD: SPANS THE FULL WIDTH OF TWO PROJECT CARDS */
-
-    .youtube-card {
-      grid-column: 1 / -1;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-      align-items: stretch;
-    }
-
-    .youtube-visual {
-      min-height: 250px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-      padding: 28px;
-      text-align: center;
-      background:
-        radial-gradient(ellipse at center, rgba(112, 216, 255, 0.14), transparent 65%),
-        linear-gradient(135deg, #142033, #0b1220);
-      border-right: 1px solid var(--border);
-    }
-
-    .youtube-play {
-      width: 82px;
-      height: 58px;
-      display: grid;
-      place-items: center;
-      border-radius: 16px;
-      background: #ff0033;
-      color: white;
-      font-size: 30px;
-      line-height: 1;
-      box-shadow: 0 8px 28px rgba(255, 0, 51, 0.2);
-    }
-
-    .youtube-visual-label {
-      color: var(--cyan);
-      font-size: 13px;
-      font-weight: bold;
-      letter-spacing: 3px;
-    }
-
-    .youtube-card .project-content {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 32px;
-    }
-
-    .youtube-card .project-content p {
-      max-width: 540px;
-    }
-
-    .youtube-card .project-link {
-      margin-top: 2px;
-    }
-
     .project-image {
+      display: block;
       width: 100%;
       aspect-ratio: 16 / 9;
       object-fit: cover;
-      display: block;
       background: var(--panel-light);
     }
 
@@ -338,6 +283,7 @@
 
     .project-content h3 {
       font-size: 22px;
+      line-height: 1.3;
       margin-bottom: 10px;
     }
 
@@ -348,6 +294,7 @@
     }
 
     .project-link {
+      display: inline-block;
       color: var(--cyan);
       font-size: 14px;
       font-weight: bold;
@@ -355,6 +302,68 @@
 
     .project-link:hover {
       text-decoration: underline;
+    }
+
+    /* YOUTUBE CARD
+       Image on the left, text on the right.
+       Image has a fixed maximum size so it cannot fill the entire card.
+    */
+
+    .youtube-card {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+      align-items: center;
+      gap: 28px;
+      padding: 24px;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .youtube-visual {
+      width: 100%;
+      min-width: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      background: var(--panel-light);
+      line-height: 0;
+    }
+
+    .youtube-thumbnail {
+      display: block;
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 10px;
+    }
+
+    .youtube-card .project-content {
+      min-width: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .youtube-card .project-number {
+      margin-bottom: 10px;
+    }
+
+    .youtube-card .project-content h3 {
+      font-size: 25px;
+      margin-bottom: 14px;
+    }
+
+    .youtube-card .project-content p {
+      max-width: 600px;
+      margin-bottom: 18px;
+      line-height: 1.8;
+    }
+
+    .youtube-card .project-link {
+      margin-top: 0;
     }
 
     /* ENGINEERING APPROACH */
@@ -390,6 +399,8 @@
       font-size: 14px;
     }
 
+    /* FOOTER */
+
     footer {
       border-top: 1px solid var(--border);
       padding: 28px 0;
@@ -407,6 +418,28 @@
 
     .footer-accent {
       color: var(--cyan);
+    }
+
+    /* TABLET AND MOBILE */
+
+    @media (max-width: 800px) {
+      .youtube-card {
+        grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
+        gap: 22px;
+        padding: 20px;
+      }
+
+      .youtube-thumbnail {
+        height: 190px;
+      }
+
+      .youtube-card .project-content h3 {
+        font-size: 22px;
+      }
+
+      .youtube-card .project-content p {
+        font-size: 13px;
+      }
     }
 
     @media (max-width: 650px) {
@@ -439,7 +472,6 @@
         padding: 58px 0;
       }
 
-      /* On mobile, the two photos appear above the About text. */
       .about-layout {
         grid-template-columns: 1fr;
         gap: 25px;
@@ -461,17 +493,33 @@
       }
 
       .youtube-card {
-        grid-template-columns: 1fr;
+        grid-column: 1;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+        padding: 16px;
       }
 
       .youtube-visual {
-        min-height: 190px;
-        border-right: 0;
-        border-bottom: 1px solid var(--border);
+        width: 100%;
+      }
+
+      .youtube-thumbnail {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
       }
 
       .youtube-card .project-content {
-        padding: 23px;
+        padding: 0 2px 4px;
+      }
+
+      .youtube-card .project-content h3 {
+        font-size: 22px;
+      }
+
+      .youtube-card .project-content p {
+        font-size: 14px;
       }
 
       .approach-grid {
@@ -487,12 +535,21 @@
       .about-photo {
         aspect-ratio: 4 / 3;
       }
+
+      .brand {
+        gap: 8px;
+      }
+
+      nav {
+        gap: 10px;
+      }
     }
   </style>
 </head>
 
 <body>
 
+  <!-- HEADER -->
   <header>
     <div class="container navbar">
       <a class="brand" href="#home">
@@ -508,11 +565,14 @@
   </header>
 
   <main>
+
     <!-- HERO -->
     <section class="hero" id="home">
       <div class="container">
         <div class="eyebrow">Maker Portfolio · 2026</div>
+
         <h1>Reyhan Kondapally</h1>
+
         <p class="hero-description">
           Aspiring aerospace engineer exploring aerodynamics, computational
           fluid dynamics, and aircraft design through hands-on experimentation.
@@ -525,7 +585,7 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- ABOUT ME -->
     <section id="about">
       <div class="container">
         <div class="section-label">01 / About</div>
@@ -533,14 +593,12 @@
 
         <div class="about-layout">
 
-          <!-- TWO PHOTOS, STACKED VERTICALLY -->
           <div class="about-photos">
             <img
               class="about-photo"
               src="images/about-me.jpg"
               alt="Photo of Reyhan"
               loading="lazy"
-              onerror="this.style.display='none'"
             >
 
             <img
@@ -548,11 +606,9 @@
               src="images/about-me-2.jpg"
               alt="Another photo of Reyhan"
               loading="lazy"
-              onerror="this.style.display='none'"
             >
           </div>
 
-          <!-- ABOUT ME TEXT -->
           <div class="about-copy">
             <h3>Hi, I'm Reyhan.</h3>
 
@@ -586,6 +642,7 @@
       <div class="container">
         <div class="section-label">02 / Selected Work</div>
         <h2>Projects & Experiments</h2>
+
         <p class="section-intro">
           Each project is an opportunity to turn questions into experiments,
           learn from the results, and improve the next design.
@@ -593,7 +650,7 @@
 
         <div class="projects-grid">
 
-          <!-- PROJECT 1 -->
+          <!-- PROJECT 1: IGNISFIRE -->
           <a class="project-card" href="project.html?project=ignisfire">
             <img
               class="project-image"
@@ -601,18 +658,21 @@
               alt="IgnisFire automatic fire extinguishing system"
               loading="lazy"
             >
+
             <div class="project-content">
               <div class="project-number">PROJECT 01</div>
               <h3>IgnisFire</h3>
+
               <p>
                 An automatic fire detection and extinguishing prototype
                 designed to explore ways of responding to onboard fires.
               </p>
+
               <span class="project-link">Explore Project ↗</span>
             </div>
           </a>
 
-          <!-- PROJECT 2 -->
+          <!-- PROJECT 2: AIRFOIL RESEARCH -->
           <a class="project-card" href="project.html?project=airfoil-research">
             <img
               class="project-image"
@@ -620,18 +680,21 @@
               alt="Computational fluid dynamics airfoil research"
               loading="lazy"
             >
+
             <div class="project-content">
               <div class="project-number">PROJECT 02</div>
               <h3>Airfoil Research</h3>
+
               <p>
                 Using OpenFOAM and Python to simulate airflow around airfoils
                 and investigate lift, drag, and aerodynamic performance.
               </p>
+
               <span class="project-link">Explore Project ↗</span>
             </div>
           </a>
 
-          <!-- PROJECT 3 -->
+          <!-- PROJECT 3: AIRFOIL IMPLEMENTATION -->
           <a class="project-card" href="project.html?project=airfoil-implementation">
             <img
               class="project-image"
@@ -639,18 +702,21 @@
               alt="Undercambered airfoil used on an RC Fokker Dr.I"
               loading="lazy"
             >
+
             <div class="project-content">
               <div class="project-number">PROJECT 03</div>
               <h3>Airfoil Implementation</h3>
+
               <p>
                 Applying an undercambered airfoil design to a radio-controlled
                 Fokker Dr.I triplane built from lightweight foam.
               </p>
+
               <span class="project-link">Explore Project ↗</span>
             </div>
           </a>
 
-          <!-- PROJECT 4 -->
+          <!-- PROJECT 4: MOUSETRAP CAR -->
           <a class="project-card" href="project.html?project=mousetrap-car">
             <img
               class="project-image"
@@ -658,42 +724,55 @@
               alt="Mousetrap-powered car project"
               loading="lazy"
             >
+
             <div class="project-content">
               <div class="project-number">PROJECT 04</div>
               <h3>Mousetrap Car</h3>
+
               <p>
                 Experimenting with traction, wheel design, and weight
                 distribution to improve a mousetrap-powered car.
               </p>
+
               <span class="project-link">Explore Project ↗</span>
             </div>
           </a>
 
-          <!-- PROJECT 05: YOUTUBE CHANNEL, FULL WIDTH -->
+          <!-- PROJECT 5: TOGA SIMULATIONS YOUTUBE CHANNEL -->
           <a
             class="project-card youtube-card"
             href="https://www.youtube.com/@TogaSimulations14"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Visit the Toga Simulations YouTube channel (opens in a new tab)"
+            aria-label="Visit the Toga Simulations YouTube channel"
           >
+
             <div class="youtube-visual">
               <img
-               src="images/toga-simulations-thumbnail.png"
-               alt="Toga Simulations flight simulation thumbnail"
-               class="youtube-thumbnail"
-               loading="lazy"
+                src="images/toga-simulations-thumbnail.png"
+                alt="TOGA Simulations A350-900 aircraft at sunset"
+                class="youtube-thumbnail"
+                loading="lazy"
               >
             </div>
 
             <div class="project-content">
               <div class="project-number">PROJECT 05 / VIDEO CHANNEL</div>
+
               <h3>Toga Simulations on YouTube</h3>
+
               <p>
-                Visit my YouTube channel to explore my flight simulation content where I fly real airliners while following real airlines' standard operating procedures(SOPs). On our tours I fly from many different places and explain what I'm doing as I fly and execute procedures in the aircraft. I mostly fly the A320neo because it is a free aircraft. Thank you for visitng my channel!
+                Visit my YouTube channel to explore my flight simulation
+                content, where I fly real airliners while following real-world
+                standard operating procedures (SOPs). I fly to destinations
+                around the world and explain the procedures I use in the
+                aircraft. I primarily fly the A320neo because it is a free
+                aircraft. Thank you for visiting my channel!
               </p>
+
               <span class="project-link">Visit YouTube Channel ↗</span>
             </div>
+
           </a>
 
         </div>
@@ -705,6 +784,7 @@
       <div class="container">
         <div class="section-label">03 / My Approach</div>
         <h2>Question. Build. Test. Improve.</h2>
+
         <p class="section-intro">
           I approach engineering as a cycle of curiosity and experimentation.
           Every test provides information that helps me understand a problem
@@ -712,9 +792,11 @@
         </p>
 
         <div class="approach-grid">
+
           <div class="approach-card">
             <div class="number">01 / QUESTION</div>
             <h3>Understand the Problem</h3>
+
             <p>
               Ask why something behaves the way it does, then identify
               the variables that might explain it.
@@ -724,6 +806,7 @@
           <div class="approach-card">
             <div class="number">02 / BUILD</div>
             <h3>Turn Ideas Into Reality</h3>
+
             <p>
               Use simulations, programming, CAD, and hands-on construction
               to develop and investigate a design.
@@ -733,21 +816,26 @@
           <div class="approach-card">
             <div class="number">03 / IMPROVE</div>
             <h3>Learn From Testing</h3>
+
             <p>
               Analyze results, troubleshoot problems, and use what I learn
               to make the next iteration better.
             </p>
           </div>
+
         </div>
       </div>
     </section>
+
   </main>
 
   <!-- FOOTER -->
   <footer>
     <div class="container footer-content">
       <span>Reyhan Kondapally · Maker Portfolio · 2026</span>
-      <span class="footer-accent">Built through curiosity and experimentation.</span>
+      <span class="footer-accent">
+        Built through curiosity and experimentation.
+      </span>
     </div>
   </footer>
 
