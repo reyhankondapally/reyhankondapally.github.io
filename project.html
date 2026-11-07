@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +7,7 @@
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    [hidden] { display: none !important; }
 
     body {
       background: #080d17;
@@ -27,7 +27,7 @@
     .logo { color: white; font-weight: bold; letter-spacing: 1px; }
 
     main {
-      width: min(820px, 88%);
+      width: min(900px, 88%);
       margin: auto;
       padding: 48px 0 80px;
     }
@@ -70,6 +70,7 @@
       color: #70d8ff;
       font-size: 12px;
       letter-spacing: 2px;
+      overflow: hidden;
     }
 
     .project-visual img {
@@ -79,6 +80,28 @@
       max-height: 430px;
       object-fit: contain;
       border-radius: 9px;
+    }
+
+    /* YOUTUBE SHORT VIDEO */
+    .project-video {
+      display: none;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      max-width: 420px;
+      margin: -12px auto 42px;
+      overflow: hidden;
+      border: 1px solid #25354b;
+      border-radius: 10px;
+      background: #101827;
+    }
+
+    .project-video.visible { display: block; }
+
+    .project-video iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
 
     section { margin: 38px 0; }
@@ -92,6 +115,79 @@
 
     section p { color: #b9c5d7; white-space: pre-line; }
 
+    .section-photo {
+      display: block;
+      width: 100%;
+      max-width: 700px;
+      margin: -18px 0 38px;
+    }
+
+    .section-photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 480px;
+      object-fit: contain;
+      border-radius: 10px;
+      border: 1px solid #25354b;
+      background: #101827;
+    }
+
+    /* SHARED IMAGE GALLERY STYLE */
+    .photo-gallery {
+      display: none;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin: 28px 0 42px;
+      align-items: start;
+    }
+
+    .photo-gallery.visible {
+      display: grid;
+    }
+
+    .gallery-item {
+      min-width: 0;
+      overflow: hidden;
+      background: #101827;
+      border: 1px solid #25354b;
+      border-radius: 10px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-3px);
+      border-color: #70d8ff;
+    }
+
+    .gallery-item img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: contain;
+      background: #101827;
+    }
+
+    .gallery-item figcaption {
+      display: none;
+    }
+
+    .image-placeholder {
+      min-height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+      overflow-wrap: anywhere;
+      color: #70d8ff;
+      font-size: 12px;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #142b42, #101827);
+      border: 1px dashed #25354b;
+      border-radius: 10px;
+    }
+
     .detail-panel {
       padding: 24px;
       background: #101a2a;
@@ -101,36 +197,60 @@
 
     .detail-panel h2 { color: #70d8ff; }
 
-    /* AIRFOIL IMPLEMENTATION VIDEO */
-
-    .project-video-section {
-      display: none;
-      margin: 38px 0;
-    }
-
-    .project-video-section h2 {
-      color: #70d8ff;
-    }
-
-    .video-container {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 9 / 16;
-      max-width: 420px;
-      margin: 24px auto 0;
-      overflow: hidden;
+    /* IGNISFIRE VERSION LAYOUT */
+    .version-section {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: center;
+      gap: 28px;
+      margin: 42px 0;
+      padding: 22px;
       border: 1px solid #25354b;
-      border-radius: 10px;
-      background: #101827;
+      border-radius: 12px;
+      background: #101a2a;
     }
 
-    .video-container iframe {
-      position: absolute;
-      inset: 0;
+    .version-section.reverse .version-image { order: 2; }
+    .version-section.reverse .version-copy { order: 1; }
+
+    .version-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      text-align: center;
+      color: #70d8ff;
+      font-size: 12px;
+      letter-spacing: 1px;
+      overflow-wrap: anywhere;
+      overflow: hidden;
+      background: linear-gradient(135deg, #142b42, #101827);
+      border: 1px dashed #35465d;
+      border-radius: 9px;
+    }
+
+    .version-image img {
       width: 100%;
       height: 100%;
-      border: 0;
+      object-fit: contain;
     }
+
+    .version-copy h2 { color: #70d8ff; }
+    .version-copy p { color: #b9c5d7; white-space: pre-line; }
+
+    .code-link {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 9px 13px;
+      border: 1px solid #70d8ff;
+      border-radius: 5px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .code-link:hover { background: #70d8ff; color: #08111c; }
 
     .edit-note {
       margin-top: 35px;
@@ -146,13 +266,25 @@
       font-size: 13px;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
       nav { padding: 18px 5%; }
       main { width: 90%; }
       .detail-panel { padding: 19px; }
 
-      .video-container {
-        max-width: 100%;
+      .photo-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .version-section {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 17px;
+      }
+
+      .version-section.reverse .version-image,
+      .version-section.reverse .version-copy {
+        order: initial;
       }
     }
   </style>
@@ -170,53 +302,181 @@
     <h1 id="project-title">Loading project...</h1>
     <p class="subtitle" id="project-subtitle"></p>
 
-    <!-- HERO IMAGE -->
     <div class="project-visual" id="project-visual">
       ADD YOUR PROJECT PHOTO
     </div>
 
-    <!-- AIRFOIL IMPLEMENTATION VIDEO -->
-    <section class="project-video-section" id="airfoil-video">
-      <h2>Aircraft Flight Video</h2>
+    <!-- YOUTUBE SHORT: ONLY SHOWN ON AIRFOIL IMPLEMENTATION -->
+    <div class="project-video" id="project-video">
+      <iframe
+        src="https://www.youtube.com/embed/gWo9w0LpkwA"
+        title="Airfoil Implementation flight video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </div>
 
-      <p style="color:#b9c5d7; margin-bottom:20px;">
-        Watch my Fokker Dr.I triplane in flight and see the
-        airfoil design implemented on the aircraft.
-      </p>
-
-      <div class="video-container">
-        <iframe
-          src="https://www.youtube-nocookie.com/embed/gWo9w0LpkwA"
-          title="Airfoil Implementation - Fokker Dr.I Flight Video"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen>
-        </iframe>
-      </div>
-    </section>
-
-    <!-- DESCRIPTION -->
-    <section>
+    <section id="description-section">
       <h2>Description</h2>
       <p id="project-description"></p>
     </section>
 
-    <!-- CHALLENGES -->
-    <section class="detail-panel">
+    <div class="section-photo" id="description-photo"></div>
+
+    <!-- AIRFOIL IMPLEMENTATION GALLERY -->
+    <div class="photo-gallery" id="airfoil-implementation-gallery">
+
+      <figure class="gallery-item">
+        <img src="images/six.jpg" alt="Airfoil Implementation photo"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/eight.jpg" alt="Airfoil Implementation photo"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/on-foam.jpg" alt="Airfoil mounted on the foam aircraft"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/wing-structure.jpg" alt="Structure of the aircraft wing"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/no-dihedral.jpg" alt="Aircraft wing configuration without dihedral"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/module.jpg" alt="Aircraft build photo"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/rates.jpg" alt="Aircraft build photo"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/glue.jpg" alt="Aircraft construction"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/bind.jpg" alt="Aircraft setup"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/skewer.jpg" alt="Aircraft reinforcement"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/esc.jpg" alt="Electronic speed controller"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/inside.jpg" alt="Internal aircraft components"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/moun.jpg" alt="Aircraft construction"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/mount.jpg" alt="Aircraft mounting"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/rx.jpg" alt="Aircraft receiver"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/servo.jpg" alt="Aircraft servo"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+      <figure class="gallery-item">
+        <img src="images/motorsp.jpg" alt="Aircraft motor and propeller"
+             loading="lazy" onerror="this.style.display='none'">
+      </figure>
+
+    </div>
+
+    <section class="detail-panel" id="standard-challenges">
       <h2>Challenges</h2>
       <p id="project-challenges"></p>
     </section>
 
-    <!-- IMPROVEMENTS -->
-    <section class="detail-panel">
+    <div class="section-photo" id="challenges-photo"></div>
+
+    <section class="detail-panel" id="standard-improvements">
       <h2>Improvements</h2>
       <p id="project-improvements"></p>
     </section>
 
-    <p class="edit-note">
-      Engineering portfolio · Replace suggested text with your own
-      design process, specific challenges, actual changes, and test results.
-    </p>
+    <div class="section-photo" id="improvements-photo"></div>
+
+    <!-- CUSTOM LAYOUT FOR IGNISFIRE ONLY -->
+    <div id="ignisfire-layout" hidden>
+
+      <section class="version-section">
+        <div class="version-image" id="version-one-image">
+          ADD VERSION ONE PHOTO
+        </div>
+
+        <div class="version-copy">
+          <h2>Version One</h2>
+          <p id="version-one-text">In version 1, I built a simple prototype of the IgnisFire system. It had a temperature and humidity sensor, a Liquid Crystal Display, and a buzzer. I coded the system to show an alert every time the temperature went too high and I displayed text on the screen.</p>
+          <a class="code-link" href="IgnisFire_V1.txt" target="_blank" rel="noopener noreferrer">Click here to view my Arduino code ↗</a>
+        </div>
+      </section>
+
+      <section class="version-section reverse">
+        <div class="version-image" id="version-two-image">
+          ADD VERSION TWO PHOTO
+        </div>
+
+        <div class="version-copy">
+          <h2>Version Two</h2>
+          <p id="version-two-text">In version 2, I added a fire sensor and an M2 smoke sensor as well as the water pump. This allowed me to get multiple readings on what was happening. Adding the smoke sensor was needed because we could now use two different systems to predict and detect fires. On the other hand, if a fire sensor detects fire, there will be no second sensor confirmation. Fire prediction is also possible using a combination of sensors. Using the temperature sensor and smoke sensor, we can predict that a fire may occur in a certain area if we get two high readings on the temperature and smoke sensor. The water pump is activated when we have a high temperature and smoke warning or when we have a fire warning from the fire sensor. The water pump is giving electrical interference to the screen and corrupting data coming to the screen. Random characters are appearing on the screen.</p>
+          <a class="code-link" href="IgnisFire_V2.txt" target="_blank" rel="noopener noreferrer">Click here to view my Arduino code ↗</a>
+        </div>
+      </section>
+
+      <section class="version-section">
+        <div class="version-image" id="version-three-image">
+          ADD VERSION THREE PHOTO
+        </div>
+
+        <div class="version-copy">
+          <h2>Version Three</h2>
+          <p id="version-three-text">In version 3, I have solved the electrical interference problem. To solve the electrical interference problem, I added a 100 microfarad capacitor between the 5V and the ground pins of my LCD screen. I also added a 100 microfarad capacitor between the positive and negative wires of the water pump. I also put a diode between the positive and negative wires of the water pump. After doing all of this, I was still receiving some electrical interference mainly due to the magnetic field generated by the magnets spinning the motor. The only way to solve this (because I didn't have a chamber to block the magnetic field) was through moving the pump far away. I moved the pump two feet away from the rest of the circuit. After that I received little to no interference on the screen.</p>
+          <a class="code-link" href="IgnisFire_V3.txt" target="_blank" rel="noopener noreferrer">Click here to view my Arduino code ↗</a>
+        </div>
+      </section>
+
+      <section class="detail-panel">
+        <h2>Challenges</h2>
+        <p id="ignisfire-challenges"></p>
+      </section>
+
+      <section class="detail-panel">
+        <h2>Future Improvements</h2>
+        <p id="ignisfire-improvements"></p>
+      </section>
+    </div>
 
     <p style="margin-top:30px">
       <a href="index.html#projects">← Return to project collection</a>
@@ -228,150 +488,158 @@
   <script>
     const projects = {
       "ignisfire": {
-        number: "PROJECT 01 / SAFETY SYSTEMS",
+        number: "PROJECT 01 / PATENT PENDING SAFETY SYSTEM",
         title: "IgnisFire (Fire Prevention System)",
-        subtitle: "An AI-powered automatic fire-extinguishing system.",
-        photo: "",
+        subtitle: "An automatic fire-extinguishing system",
+        photo: "images/ignisfire-hero.jpg",
+
         description:
-          "IgnisFire is my project focused on aircraft fire safety through an AI-powered automatic fire-extinguishing system. The goal is to develop a system that can identify a fire-related threat and initiate an appropriate response. Add the specific problem you set out to solve, how your system works, which components you designed, and your individual contribution.",
+          "I created IgnisFire to help combat in-flight fires, particularly on cargo aircraft although it will be extended to commercial aircraft in the future. While researching aircraft accidents, I learned about UPS Flight 6, which crashed near Dubai following an in-flight cargo fire. This motivated me to explore whether an automatic detection and suppression system could respond to a fire threat. My prototype uses a temperature and humidity sensor, a smoke sensor, a fire sensor, an Arduino, an LCD screen, a relay, and a water pump. The prototype uses water for demonstration. My real aircraft application would require an appropriate aircraft-approved extinguishing agent (most likely fire foam) and extensive safety testing. The system is designed to activate the pump when two different sensors report high-alert readings. When there is a fire-sensor warning the system will automatically extinguish the fire. There were many challenges in this project, but I was able to create solutions for them.",
+
         challenges:
-          "A major design consideration is reliable detection: the system must distinguish a genuine threat from conditions that could trigger a false alarm. Other possible challenges include response time, sensor placement, system integration, and safe activation. Describe the actual technical obstacle you encountered, what you tried, and what your tests revealed.",
+          "There were several challenges as I listed in the different versions. Most of my challenges came from coding and figuring out the problems with my physical design (such as electrical interference). My coding problems originated from not being well versed in C++ (the language Arduino uses). I learned C++ as I went along with my project. Another issue I ran into was electrical interference from the pump, which was corrupting the data getting sent to the LCD display.",
+
         improvements:
-          "Describe the next version of IgnisFire. Potential directions include testing detection reliability across more conditions, measuring response time, evaluating false alarms, or improving integration between sensing and suppression. Clearly distinguish improvements already implemented from future tests. Do not claim validated aircraft readiness unless it has been established."
+          "In a future version, I would build a structured platform with several mounting positions for the pump, allowing me to test different distances from the circuit board. I would also account for electrical interference when planning the circuit layout. I would also develop a system to figure out where the fire is using a surrounding sensor system. Using that, I could activate only selected fire-extinguishing systems for a certain area to help keep the fire from spreading."
       },
 
       "airfoil-research": {
-        number: "PROJECT 02 / AERODYNAMICS",
+        number: "PROJECT 02 / AIRFOIL RESEARCH",
         title: "Airfoil Research",
-        subtitle: "Investigating airfoil geometry, angle of attack, and flow behavior.",
-        photo: "",
+        subtitle: "Investigating airfoil geometry, angle of attack, and flow behavior",
+        photo: "images/airfoil-research-hero.jpg",
+
         description:
-          "My research investigates how airfoil geometry and angle of attack affect the coefficients of lift and drag, along with vorticity and flow behavior near the boundary layer. The goal is to understand how changes in airfoil design influence aerodynamic performance. Add the airfoil profiles, research question, analysis tools, test conditions, and methodology you actually used.",
+          "I used OpenFOAM 13 to simulate airflow around airfoils and investigate how wing geometry and flow conditions affect aerodynamic performance. To create the airfoil geometry, I developed a Python script that generated the coordinate points defining the wing's shape. This allowed me to establish the geometry needed for my computational fluid dynamics (CFD) simulations and study the resulting airflow. I also created a separate script to extract and organize simulation data, including the coefficients of lift and drag and temperature distributions. By analyzing these results, I could better understand how the airfoil interacted with the surrounding airflow and how its aerodynamic characteristics changed under different conditions. Through this project, I combined Python programming and CFD to explore the relationship between wing design and aerodynamic performance. It also gave me experience developing a workflow that connected geometry generation, numerical simulation, and data analysis, allowing me to investigate aerodynamic behavior through computational experimentation.",
+
         challenges:
-          "Comparing aerodynamic performance requires attention to variables such as angle of attack, Reynolds number, and flow conditions. Numerical models may also have limitations in resolving separation and boundary-layer behavior. Explain which challenge applied to your research, how you addressed it, and what uncertainties remain in your results.",
+          "One of the biggest challenges in this project was developing a reliable workflow between Python and OpenFOAM 13. Creating a Python script to generate the airfoil's coordinate points required careful attention to the geometry, since the points needed to accurately represent the wing's shape for the CFD simulations. Another challenge was extracting and organizing useful data from the simulations. I developed a separate script to obtain the lift and drag coefficients and temperature information, allowing me to evaluate the airfoil's aerodynamic performance. Ensuring that the scripts produced usable data and that the simulation results could be interpreted correctly required troubleshooting and careful analysis. Working through these challenges helped me improve my programming skills and better understand the process of turning a computational model into meaningful aerodynamic results.",
+
         improvements:
-          "A next iteration could compare multiple airfoil profiles under consistent conditions, investigate more angles of attack, or compare calculated lift and drag with experimental observations. State the changes you actually made or plan to make, and include numerical results only when supported by your data."
+          "In future iterations, I would expand my Python scripts to automate more of the CFD workflow, making it easier to generate airfoil geometries, configure simulations, and extract and compare results. I would also investigate a wider range of airfoil shapes, angles of attack, and flow conditions to understand how each variable influences aerodynamic performance. By systematically comparing the coefficients of lift and drag, I could evaluate how effectively different designs generate lift while minimizing drag. I would further analyze temperature and velocity distributions to gain a more complete understanding of the flow field surrounding each airfoil. Another improvement would be to investigate both compressible and incompressible flow regimes. This would allow me to explore how aerodynamic behavior changes as airflow speed increases, including the development of shockwaves and their effects on drag and overall efficiency. I would also refine my data-processing scripts to organize simulation results into graphs and comparative visualizations, making trends between different airfoil designs easier to identify. Finally, I would aim to validate my CFD results against theoretical calculations or experimental data from wind tunnel testing. Combining computational simulations with physical experiments would help me assess the accuracy of my models and develop a more reliable understanding of how airfoils perform under real-world conditions."
       },
 
       "airfoil-implementation": {
-        number: "PROJECT 03 / DESIGN APPLICATION",
+        number: "PROJECT 03 / RESEARCH APPLICATION",
         title: "Airfoil Implementation",
-        subtitle: "Translating aerodynamic analysis into a practical design.",
-        photo: "",
+        subtitle: "Applying aerodynamic research to aircraft design",
+        photo: "images/airfoil-implementation-hero.jpg",
+
         description:
-          "This project focuses on applying airfoil concepts to a physical aircraft, wing, or design. Explain which airfoil you selected, what it was used for, and how your research informed the decision. Add the design dimensions, materials, software, fabrication process, and intended operating conditions relevant to your build.",
+          "Using OpenFOAM 13, I developed an undercambered airfoil designed to generate high lift at low flight speeds. Through computational fluid dynamics (CFD) simulations, I studied airflow and pressure distributions to understand how the airfoil's geometry influenced its aerodynamic performance. I learned that increasing the airfoil's camber could generate substantial lift, but it also increased drag, reducing the aircraft's speed. For the foam aircraft I built, this trade-off was important: the additional drag helped limit the speed the aircraft could reach, reducing the risk of aerodynamic loads damaging its lightweight foam structure. I then applied my undercambered airfoil design to a radio-controlled (RC) Fokker Dr.I that I built, incorporating it into all three of the aircraft's separate wings. Building the triplane allowed me to take my research beyond computer simulations and apply my understanding of aerodynamics to a physical model. By combining CFD analysis with hands-on aircraft construction, I explored how airfoil geometry affects lift, drag, and the practical design considerations involved in building a lightweight RC aircraft.",
+
         challenges:
-          "Implementing an airfoil involves more than selecting a profile. Structural requirements, weight, manufacturability, surface finish, and operating conditions can affect the final design. Describe the specific trade-off or construction difficulty you encountered and how you decided what to prioritize.",
+          "One of the biggest challenges was achieving stable flight. During testing, I found that the aircraft was not stable enough, so I decided to increase the camber of each wing by 6 degrees to improve its aerodynamic characteristics. This required me to reconsider how the wing geometry affected the aircraft's overall flight behavior. Another challenge was the strength of the landing gear struts. The original design was not strong enough to support the aircraft reliably, so I had to reinforce the struts to create a sturdier structure. These challenges taught me that designing an aircraft involves more than developing an airfoil that generates lift. Stability, structural integrity, and the interaction between aerodynamic performance and physical construction are equally important when turning a design into a functional RC aircraft.",
+
         improvements:
-          "For the next iteration, identify one measurable design objective, such as reducing weight, improving dimensional accuracy, or evaluating performance across a range of operating conditions. Describe any revised geometry or construction method you tested, and explain how you would measure whether the change helped."
+          "In future iterations, I would refine the airfoil design through additional CFD simulations to better understand how different camber angles affect lift, drag, and flight stability. I would also test different camber configurations across the three wings to determine whether adjusting each wing individually could improve the aircraft's overall handling. Additionally, I would further reinforce the landing gear struts while minimizing unnecessary weight, ensuring the structure could withstand landings without compromising flight performance. I would also explore ways to improve the aircraft's stability through adjustments to its wing alignment and overall configuration. By combining further simulations with repeated flight testing, I could identify areas for improvement and develop a more stable, durable, and aerodynamically efficient RC Fokker Dr.I."
       },
 
       "wind-tunnel": {
-        number: "PROJECT 04 / EXPERIMENTAL AERODYNAMICS",
+        number: "PROJECT 04 / WIND TUNNEL BUILD AND TEST",
         title: "Wind Tunnel",
-        subtitle: "Building a setup to investigate airflow over wings.",
+        subtitle: "Building a setup to investigate airflow over airfoils",
         photo: "",
         description:
-          "I built a wind tunnel to investigate airflow over wings and explore how wing geometry and angle of attack affect flow behavior. This project gave me a way to investigate aerodynamics experimentally instead of relying only on theory. Add details about the tunnel's construction, airflow visualization method, test articles, and how you recorded observations.",
+          "I built my own wind tunnel to investigate airflow over different wing shapes and angles of attack. I used strings to visualize airflow and observe how changes in geometry and angle of attack affected the flow.",
         challenges:
-          "Experimental observations depend on the quality and consistency of the airflow. Potential limitations include nonuniform flow, turbulence, vibration, and difficulty observing flow features clearly. Explain the actual limitation you encountered, how you recognized it, and what effect it had on your experiments.",
+          "Experimental observations depend on the quality and consistency of airflow. Describe the specific limitations you encountered and how they affected your experiments.",
         improvements:
-          "A future iteration could improve flow uniformity, refine the test section, make the angle of attack easier to adjust, or establish a more repeatable visualization method. Explain which improvements you actually implemented and what changed in the resulting observations."
+          "A future version could improve flow uniformity, refine the test section, make the angle of attack easier to adjust, or establish a more repeatable visualization method."
       },
 
       "corsair": {
-        number: "PROJECT 05 / RC AIRCRAFT",
+        number: "PROJECT 05 / RC CORSAIR",
         title: "Vought F4U Corsair",
-        subtitle: "Building a model of the distinctive inverted-gull-wing fighter.",
+        subtitle: "Building a model of the distinctive inverted gull-wing fighter",
         photo: "",
         description:
-          "I built a radio-controlled model of the Vought F4U Corsair, an aircraft known for its distinctive inverted-gull wing. The project connects aircraft geometry with practical model construction. The full-size Corsair's wing arrangement helped accommodate a large propeller while allowing relatively short landing gear. Explain how your model was built, which design features you reproduced, and what you wanted to learn.",
+          "I built a radio-controlled model of the Vought F4U Corsair, an aircraft known for its distinctive inverted gull wing. This project connected aircraft geometry with practical model construction.",
         challenges:
-          "A model aircraft requires attention to alignment, center of gravity, structural strength, control setup, and landing-gear clearance. Describe the actual issue you faced during construction or flight testing. If you investigated operation from dirt runways, explain the ground-clearance or landing problem you wanted to address.",
+          "One challenge was learning how to create the airfoil shape while building the aircraft. Add any other specific construction or testing difficulties you encountered.",
         improvements:
-          "Identify the biggest limitation of your initial build and describe how you addressed it or would approach it in a future version. Depending on your actual experience, this could involve refining alignment, adjusting balance, improving structural joints, or modifying the landing gear. Explain how you evaluated the effect of any change."
+          "A future iteration could focus on improving construction accuracy, refining alignment, or evaluating the model's flight characteristics."
       },
 
       "fokker-dr1": {
-        number: "PROJECT 06 / AIRCRAFT DESIGN",
+        number: "PROJECT 06 / RC FOKKER DR1",
         title: "Fokker DR1",
-        subtitle: "Exploring the construction and design of a historic triplane.",
+        subtitle: "Building a three-winged radio-controlled aircraft",
         photo: "",
         description:
-          "The Fokker Dr.I is a historic First World War triplane recognized by its three-wing configuration. This project explores translating that distinctive aircraft into a model. Describe the particular kit or plans you used, the scale, construction materials, and which parts of the aircraft design interested you most.",
+          "The Fokker Dr.I is a historic First World War triplane recognized by its three-wing configuration. This project explores translating that distinctive aircraft into a model.",
         challenges:
-          "A triplane model introduces construction and alignment considerations across three wings, along with weight, structural rigidity, and control setup. Describe the specific construction or flight challenge you encountered rather than assuming every potential issue occurred in your build.",
+          "Challenges included cutting the wings, constructing the fuselage, and fitting the motor and servos into a tight space while managing the wiring.",
         improvements:
-          "For a future iteration, consider how to improve alignment between the wings, reduce unnecessary weight, reinforce a weak joint, or make assembly more repeatable—if those issues apply to your model. Explain what you changed, or identify the next test you would perform."
+          "A future version could focus on improving component access, organizing wiring, and making assembly more repeatable."
       },
 
       "wee-papillon": {
-        number: "PROJECT 07 / MODEL AIRCRAFT",
+        number: "PROJECT 07 / MY FIRST RC AIRCRAFT",
         title: "Wee Papillon",
-        subtitle: "Model aircraft design, construction, and experimentation.",
+        subtitle: "My first radio-controlled aircraft",
         photo: "",
         description:
-          "This project documents my Wee Papillon model aircraft. Describe the design or kit, its intended flying characteristics, how I constructed it, and the engineering question I wanted to explore. Include the model's configuration, materials, power system if applicable, and any modifications I made.",
+          "The Wee Papillon was the first radio-controlled aircraft I built. Through this project, I learned about the aircraft's components, controls, construction, and flight.",
         challenges:
-          "Describe the most important obstacle in this particular build. It could involve fitting components, keeping the structure aligned, balancing the aircraft, setting up its controls, or achieving consistent flight performance—but include only the challenges that actually applied to my project.",
+          "Describe the most important obstacle you faced while building, setting up, or learning to fly this aircraft.",
         improvements:
-          "Explain how I improved the aircraft after the initial build or what I would change next. I could discuss a revised component layout, improved construction accuracy, changes to balance, or more systematic flight testing if relevant. Include evidence of any improvement already tested."
+          "A future iteration could focus on improving construction accuracy, component layout, or flight testing."
       },
 
       "mousetrap-car": {
         number: "PROJECT 08 / MECHANICAL DESIGN",
         title: "Mousetrap Car",
-        subtitle: "Investigating stored energy, torque, and mechanical advantage.",
+        subtitle: "Designing and building a mousetrap car from scratch",
         photo: "",
         description:
-          "The mousetrap car project explores how stored spring energy can be converted into vehicle motion. Its performance depends on the relationship between the driving arm, axle, wheel radius, traction, and friction. Describe my vehicle's design, the materials used, the goal of the build, and how I measured its performance.",
+          "For my Mousetrap Car project, I designed and built a small car powered entirely by the energy stored in a mousetrap. I used balsa wood for the frame, CDs for the wheels, and a string connected to the mousetrap mechanism to transfer energy to the axle and propel the car forward. During testing, I discovered that the CDs slipped on the wooden floor, reducing the car’s traction. To solve this problem, I added thin rubber strips around the wheels and placed two 20-gram weights at the rear of the car to improve its performance. This project taught me how to apply basic mechanical principles, experiment with different design solutions, and improve a prototype through testing.",
         challenges:
-          "A mousetrap car must balance distance, speed, and reliable movement. Friction, wheel alignment, axle resistance, traction, and the linkage geometry can all affect performance. Identify the real problem I encountered, the evidence I used to understand it, and the design choice I made in response.",
+          "One of the biggest challenges I faced while building my Mousetrap Car was getting the wheels to maintain traction on the wooden floor. Since I used CDs as wheels, they slipped during testing, preventing the car from transferring its energy efficiently into forward motion. To solve this, I added thin rubber strips around the wheels to improve grip. I also experimented with the car’s weight distribution by adding two 20-gram weights to the rear. These adjustments helped improve the car’s performance and taught me the importance of testing and making targeted design improvements. Another challenge was designing a reliable mechanism to transfer energy from the mousetrap to the wheels. I had to make sure the string was properly connected to the axle so that the mousetrap’s spring could pull it and drive the car forward. This required careful assembly and adjustments to ensure the mechanism worked smoothly and the car could move effectively.",
         improvements:
-          "In a next iteration, I could change one variable at a time—for example, wheel diameter, axle friction, or linkage geometry—and compare repeated trials. Describe the modification I actually tested, the measured result, and how the evidence informed the next design decision."
+          "If I were to improve my Mousetrap Car, I would focus on making the design more efficient and reducing energy loss. I would experiment with different wheel materials and sizes to find a combination that provides better traction while allowing the car to roll smoothly. I would also refine the string-and-axle mechanism to ensure that energy from the mousetrap is transferred to the wheels as efficiently as possible. Additionally, I would test different weight distributions to determine the best balance between traction and the car’s overall mass. By making these changes and comparing the results through repeated trials, I could develop a more reliable design and improve the car’s performance."
       },
 
       "automata-cad": {
         number: "PROJECT 09 / CAD & MECHANISMS",
         title: "Automata CAD",
-        subtitle: "Modeling mechanical motion through computer-aided design.",
+        subtitle: "Modeling mechanical motion in Fusion 360",
         photo: "",
         description:
-          "This project focuses on designing a mechanical automaton using computer-aided design. An automaton uses mechanisms to convert an input motion into a repeated movement. Describe the moving elements I modeled, the CAD software used, the intended motion, and how the individual components work together.",
+          "I designed an automaton in Fusion 360 to explore how a cam mechanism can convert rotational motion into repeated movement.",
         challenges:
-          "A mechanism that looks correct in a static CAD view may not move as intended. Component interference, pivot placement, clearances, and motion constraints can all affect its operation. Describe the actual issue I encountered in the model and how I identified its cause.",
+          "One of the most difficult parts was designing the pear-shaped cam. I also had to correct component joints that were initially connected incorrectly.",
         improvements:
-          "The next iteration could refine the mechanism geometry, adjust pivot locations, improve clearances, or test the motion through an assembly simulation. Explain the actual CAD revisions I made, how I checked movement, and what I would validate in a physical prototype if applicable."
+          "A future iteration could refine the cam profile, improve component clearances, and check the assembly's motion more systematically."
       },
 
       "truss-design": {
         number: "PROJECT 10 / STRUCTURAL ENGINEERING",
         title: "Truss Design",
-        subtitle: "Exploring structural geometry and the distribution of loads.",
+        subtitle: "Exploring structural geometry and load distribution",
         photo: "",
         description:
-          "This project investigates how a truss transfers loads through interconnected structural members. The arrangement of its members and joints affects the forces carried by the structure. Describe the truss geometry I designed, the material and design constraints, how loads were applied or calculated, and the goal I was trying to achieve.",
+          "This project investigates how a truss transfers loads through interconnected structural members and how its geometry affects the forces carried by each member.",
         challenges:
-          "A truss design requires attention to member forces, joint behavior, stability, buckling, and material limitations. Explain the actual challenge I encountered, whether through calculations, CAD, or physical testing, and how it influenced my design choices.",
+          "One challenge was calculating the forces in the individual members and determining whether each member was under tension or compression.",
         improvements:
-          "A next iteration could compare alternative truss geometries, revise member dimensions, or redistribute material to improve strength or efficiency. Describe the changes I actually made, how I assessed them, and any load-test or calculation results that support my conclusions."
+          "A future iteration could compare alternative truss geometries and assess how changes affect strength, stability, and material use."
       },
 
       "bridge-building": {
         number: "PROJECT 11 / STRUCTURAL ENGINEERING",
         title: "Bridge Building",
-        subtitle: "Designing and constructing a bridge under structural constraints.",
+        subtitle: "Comparing square supports and triangular bracing",
         photo: "",
         description:
-          "This project involves designing and building a bridge to meet a set of structural and construction requirements. The challenge is to transfer loads safely through the structure while working within material, span, and design constraints. Describe the bridge type, materials, construction process, requirements, and how its performance was evaluated.",
+          "In this project, I built bridges to explore the differences between square structural supports and triangular bracing.",
         challenges:
-          "Potential challenges include joint strength, uneven load distribution, structural deflection, buckling, and material limits. Explain the actual failure point, design constraint, or construction difficulty I encountered, and what the calculations or tests revealed about the structure.",
+          "Describe the construction difficulties you encountered and how the different support arrangements affected the structure.",
         improvements:
-          "For a next iteration, I could revise the truss arrangement, reinforce a critical joint, reduce unnecessary material, or improve the load distribution. Explain which changes I actually made or would test next, and compare the results using measured load capacity, deflection, mass, or another relevant metric."
+          "A future iteration could compare the designs using consistent materials and loading conditions to better evaluate their structural performance."
       }
     };
 
-    // GET THE SELECTED PROJECT FROM THE URL
     const key = new URLSearchParams(window.location.search).get("project");
     const project = projects[key];
 
@@ -385,28 +653,86 @@
       document.getElementById("project-challenges").textContent = project.challenges;
       document.getElementById("project-improvements").textContent = project.improvements;
 
-      // SHOW THE VIDEO ONLY ON AIRFOIL IMPLEMENTATION
-      if (key === "airfoil-implementation") {
-        document.getElementById("airfoil-video").style.display = "block";
-      }
+      const visual = document.getElementById("project-visual");
 
-      // LOAD THE PROJECT HERO IMAGE
       if (project.photo) {
         const image = document.createElement("img");
         image.src = project.photo;
         image.alt = project.title + " project photograph";
 
-        const visual = document.getElementById("project-visual");
-
         image.onerror = function () {
-          visual.textContent = "ADD YOUR PROJECT PHOTO";
+          visual.textContent = "ADD YOUR " + project.title.toUpperCase() + " PHOTO";
         };
 
-        visual.textContent = "";
-        visual.appendChild(image);
+        visual.replaceChildren(image);
       } else {
-        document.getElementById("project-visual").textContent =
-          "ADD YOUR " + project.title.toUpperCase() + " PHOTO";
+        visual.textContent = "ADD YOUR " + project.title.toUpperCase() + " PHOTO";
+      }
+
+      function loadSectionImage(containerId, sectionName, altText) {
+        const container = document.getElementById(containerId);
+        const imagePath = "images/" + key + "-" + sectionName + ".jpg";
+        const image = document.createElement("img");
+
+        image.src = imagePath;
+        image.alt = project.title + " - " + altText;
+
+        image.onerror = function () {
+          const placeholder = document.createElement("div");
+          placeholder.className = "image-placeholder";
+          placeholder.textContent = "ADD IMAGE: " + imagePath;
+          container.replaceChildren(placeholder);
+        };
+
+        container.replaceChildren(image);
+      }
+
+      if (key === "ignisfire") {
+        document.getElementById("ignisfire-layout").hidden = false;
+
+        document.getElementById("description-photo").hidden = true;
+        document.getElementById("standard-challenges").hidden = true;
+        document.getElementById("challenges-photo").hidden = true;
+        document.getElementById("standard-improvements").hidden = true;
+        document.getElementById("improvements-photo").hidden = true;
+
+        document.getElementById("ignisfire-challenges").textContent = project.challenges;
+        document.getElementById("ignisfire-improvements").textContent = project.improvements;
+
+        const versionImages = [
+          ["version-one-image", "images/ignisfire-version-one.jpg", "ADD VERSION ONE PHOTO"],
+          ["version-two-image", "images/ignisfire-version-two.jpg", "ADD VERSION TWO PHOTO"],
+          ["version-three-image", "images/ignisfire-version-three.jpg", "ADD VERSION THREE PHOTO"]
+        ];
+
+        versionImages.forEach(function (item) {
+          const container = document.getElementById(item[0]);
+          const image = document.createElement("img");
+
+          image.src = item[1];
+          image.alt = item[2].replace("ADD ", "").replace(" PHOTO", "");
+
+          image.onerror = function () {
+            container.textContent = item[2];
+          };
+
+          container.replaceChildren(image);
+        });
+
+      } else {
+        document.getElementById("ignisfire-layout").hidden = true;
+
+        if (key === "airfoil-implementation") {
+          document.getElementById("project-video").classList.add("visible");
+          document.getElementById("airfoil-implementation-gallery").classList.add("visible");
+          document.getElementById("description-photo").hidden = true;
+
+        } else {
+          loadSectionImage("description-photo", "description", "description");
+        }
+
+        loadSectionImage("challenges-photo", "challenges", "challenges");
+        loadSectionImage("improvements-photo", "improvements", "improvements");
       }
 
     } else {
@@ -414,20 +740,18 @@
 
       document.getElementById("project-number").textContent = "PROJECT NOT FOUND";
       document.getElementById("project-title").textContent = "Select a project";
-
       document.getElementById("project-subtitle").textContent =
-        "Return to the homepage and select one of the 11 project boxes.";
+        "Return to the homepage and select a project.";
 
-      document.getElementById("project-visual").style.display = "none";
-
-      document.getElementById("project-description").textContent =
-        "This project link could not be found. Return to the homepage to choose a project.";
-
-      document.getElementById("project-challenges").textContent =
-        "No project was selected.";
-
-      document.getElementById("project-improvements").textContent =
-        "Choose a project from the homepage to view its details.";
+      document.getElementById("project-visual").hidden = true;
+      document.getElementById("description-section").hidden = true;
+      document.getElementById("description-photo").hidden = true;
+      document.getElementById("standard-challenges").hidden = true;
+      document.getElementById("challenges-photo").hidden = true;
+      document.getElementById("standard-improvements").hidden = true;
+      document.getElementById("improvements-photo").hidden = true;
+      document.getElementById("airfoil-implementation-gallery").hidden = true;
+      document.getElementById("ignisfire-layout").hidden = true;
     }
   </script>
 </body>
